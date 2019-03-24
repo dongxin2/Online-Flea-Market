@@ -12,7 +12,7 @@
 	/* step4: define init function */
 	function init() {
 		// Register event listeners
-//		$('nearby-btn').addEventListener('click', loadNearbyItems);
+		$('nearby-btn').addEventListener('click', loadNearbyItems);
 //		$('fav-btn').addEventListener('click', loadFavoriteItems);
 //		$('recommend-btn').addEventListener('click', loadRecommendedItems);
 		
@@ -20,7 +20,7 @@
         		welcomeMsg.innerHTML = 'Welcome, ' + user_fullname;
         
         		// step 7
-        		initGeoLocation();
+//        		initGeoLocation();
 	}
 	
 	/* step5: create $ function */
@@ -138,33 +138,33 @@
 		// step 12
 		activeBtn('nearby-btn');
 
-//		// The request parameters
-//		var url = './search';
-//		var params = 'user_id=' + user_id + '&lat=' + lat + '&lon=' + lng;
-//		var req = JSON.stringify({});
-//
-//		// step 13
-//		// display loading message
-//		showLoadingMessage('Loading nearby items...');
-//
-//		// make AJAX call
-//		ajax('GET', url + '?' + params, req,
-//		// successful callback
-//		function(res) {
-//			var items = JSON.parse(res);
-//			if (!items || items.length === 0) {
-//				// step 14
-//				showWarningMessage('No nearby item.');
-//			} else {
-//				// step 16
-//				listItems(items);
-//			}
-//		},
-//		// failed callback
-//		function() {
-//			// step 15
-//			showErrorMessage('Cannot load nearby items.');
-//		});
+		// The request parameters
+		var url = './search';
+		var params = 'user_id=' + user_id + '&lat=' + lat + '&lon=' + lng;
+		var req = JSON.stringify({});
+
+		// step 13
+		// display loading message
+		showLoadingMessage('Loading nearby items...');
+
+		// make AJAX call
+		ajax('GET', url + '?' + params, req,
+		// successful callback
+		function(res) {
+			var items = JSON.parse(res);
+			if (!items || items.length === 0) {
+				// step 14
+				showWarningMessage('No nearby item.');
+			} else {
+				// step 16
+				listItems(items);
+			}
+		},
+		// failed callback
+		function() {
+			// step 15
+			showErrorMessage('Cannot load nearby items.');
+		});
 	}
 		/** step 12: activeBtn function **/
 	
@@ -267,7 +267,7 @@
 		var category = $('p', {
 			className : 'item-category'
 		});
-		category.innerHTML = 'Category: ' + item.categories.join(', ');
+		category.innerHTML = 'Category: ' + item.category;
 		section.appendChild(category);
 
 		var stars = $('div', {
@@ -296,7 +296,7 @@
 			className : 'item-address'
 		});
 
-		address.innerHTML = item.address.replace(/,/g, '<br/>').replace(/\"/g,
+		address.innerHTML = item.description.replace(/,/g, '<br/>').replace(/\"/g,
 				'');
 		li.appendChild(address);
 

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -38,20 +39,27 @@ public class SearchItem extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		double lat = Double.parseDouble(request.getParameter("lat"));
-		double lon = Double.parseDouble(request.getParameter("lon"));
+//		double lat = Double.parseDouble(request.getParameter("lat"));
+//		double lon = Double.parseDouble(request.getParameter("lon"));
+		String userId = (request.getParameter("user_id"));
 		// Term can be empty or null.
 		String term = request.getParameter("term");
 
 		DBConnection connection = DBConnectionFactory.getConnection();
-		List<Item> items = connection.searchItems(lat, lon, term);
- 		connection.close();
+		List<Item> items = connection.searchItems(userId);
+		
+		Set<String> favorite = connection.getFavoriteItemIds(userId);
+		connection.close();
 
 		List<JSONObject> list = new ArrayList<>();
 		try {
 			for (Item item : items) {
 				// Add a thin version of item object
 				JSONObject obj = item.toJSONObject();
+				// Check if this is a favorite one.
+				// This field is required by frontend to correctly display favorite items.
+				obj.put("favorite", favorite.contains(item.getItemId()));
+
 				list.add(obj);
 			}
 		} catch (Exception e) {

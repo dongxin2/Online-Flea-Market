@@ -61,7 +61,7 @@ public interface DBConnection {
 	 *            (Nullable)
 	 * @return list of items
 	 */
-	public List<Item> searchItems(double lat, double lon, String term);
+	public List<Item> searchItems(String userId);
 
 	/**
 	 * Save item into db.

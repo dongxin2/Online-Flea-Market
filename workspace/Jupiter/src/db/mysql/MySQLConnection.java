@@ -7,6 +7,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -166,9 +167,39 @@ public class MySQLConnection implements DBConnection{
 	}
 
 	@Override
-	public List<Item> searchItems(double lat, double lon, String term) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Item> searchItems(String userId) {
+		List<Item> items = new ArrayList<>();
+		Set<String> itemIds = getFavoriteItemIds(userId);
+		System.out.println(userId);
+		try {
+			String sql = "SELECT * FROM items WHERE seller_id = ?";
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			for (String itemId : itemIds) {
+				stmt.setString(1, userId);
+				
+				ResultSet rs = stmt.executeQuery();
+				
+				ItemBuilder builder = new ItemBuilder();
+				
+				while (rs.next()) {
+					System.out.println(rs.getString("seller_id"));
+					builder.setItemId(rs.getString("item_id"));
+					builder.setName(rs.getString("name"));
+					builder.setCategory(rs.getString("category"));
+					builder.setPrice(rs.getDouble("price"));
+					builder.setImageUrl(rs.getString("image_url"));
+					builder.setDescription(rs.getString("description"));
+					builder.setApprove(rs.getDouble("approve"));
+					builder.setSellerId(rs.getString("seller_id"));
+
+					items.add(builder.build());
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return items;
 	}
 
 	@Override
