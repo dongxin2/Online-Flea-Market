@@ -1,56 +1,86 @@
 * {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
 }
 
 body {
-  background: #434343;
-  color: white;
-  font-family: 'Open Sans', sans-serif;
-  font-weight: 300;
-  font-size: 0.9em;
+	background: #434343;
+	color: #FFFFFF;
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 300;
+	font-size: 0.9em;
 }
 
 ul {
-  list-style: none;
+	list-style: none;
 }
 
+/**
+ * top header
+ */
 .top-header {
-  width: 100%;
-  height: 60px;
-  background: #DF574B;
-  display: flex;
-  align-items: center;
-  position: fixed;
-  z-index: 1;
-  box-shadow: 0px 2px 10px #333;
+	align-items: center;
+	background: #DF574B;
+	box-shadow: 0px 2px 10px #333333;
+	display: flex;
+	height: 60px;
+	position: fixed;
+	top: 0;
+	width: 100%;
+	z-index: 1;
 }
 
 .avatar {
-  background-color: white;
-  color: #333;
-  border-radius: 50%;
-  height: 40px;
-  margin-left: 20px;
-  padding-left: 9px;
-  padding-top:5px;
-  width: 40px;
+	background: #FFFFFF;
+	border-radius: 50%;
+	color: #333C4D;
+	height: 40px;
+	margin-right: 20px;
+	padding-left: 9px;
+	padding-top: 5px;
+	width: 40px;
+}
+
+/**
+ * top navigation
+ */
+.top-nav {
+	flex: 1;
 }
 
 .top-nav a {
-  margin-left: 20px;
-  color: #F9F9F9;
-  text-decoration: none;
-  font-weight: 400;
+	color: #F9F9F9;
+	font-weight: 400;
+	margin-left: 20px;
+	text-decoration: none;
 }
 
+#welcome-msg {
+	border-right: 1px solid #FFFFFF;
+	padding-right: 10px;
+}
+
+/**
+ * main container
+ */
+.container {
+	margin: 60px auto;
+	max-width: 1000px;
+	min-width: 600px;
+}
+
+/**
+ * main header
+ */
 .container > header {
-  height: 250px;
-  background: url('http://prophoto.com.cy/wp-content/galleries/food/food-restaurant-photographer-cyprus-10.jpg') no-repeat 50% 50%;  
-  display: flex;
   align-items: center;
+  background: 
+  url('https://images.pexels.com/photos/1227520/pexels-photo-1227520.jpeg?cs=srgb&dl=alps-background-beautiful-view-1227520.jpg&fm=jpg')
+  no-repeat 50% 50%;  
   background-size: 100%;
+	display: flex;
+	height: 250px;
 }
 
 .container > header p {
@@ -76,12 +106,23 @@ ul {
   width: 180px;
 }
 
+/**
+ * aside
+ */
+#item-nav {
+	float: left;
+	width: 180px;
+}
+
 .nav-icon {
   color: #624630;
   padding: 20px;
   text-align: center;
 }
 
+/**
+ * main navigation
+ */
 .main-nav-btn {
   background: none;
   color: white;
@@ -107,15 +148,27 @@ ul {
 }
 
 
-.restaurant-list {
-  list-style:  none;
-  margin-left: 180px;
-  min-height:  250px;
-  padding:     10px;
-  background:  #F2EBD9;
+/**
+ * item list
+ */
+
+#item-list {
+	background: #F2EBD9;
+	color: #624630;
+	list-style: none;
+	margin-left: 180px;
+	min-height: 250px;
+	padding: 10px;
 }
 
-.restaurant {
+#item-list .notice {
+	font-size: 16px;
+	padding: 60px;
+	text-align: center;
+}
+
+
+.item {
   display: flex;
   align-items: center;
   color: #624630;
@@ -124,46 +177,64 @@ ul {
   padding: 15px;
 }
 
-.restaurant:hover {
-  background: rgba(255, 255, 255, 0.8);
+.item:last-child {
+	border: none;
 }
 
-.restaurant:last-child {
-  border: none;
+.item:hover {
+	background: rgba(255, 255, 255, 0.8);
+	transition: background-color 100ms linear;
 }
 
-.restaurant img {
-  border: 1px solid #FFFFFF;
-  height: 80px;
-  width:  80px;
+.item img {
+	border: 1px solid #FFFFFF;
+	height: 80px;
+	width: 80px;
 }
 
-.restaurant div:first-of-type {
-  flex: 1;
-  margin-left:  10px;
-  margin-right: 10px;
+.item>div:first-of-type {
+	flex: 1;
+	margin-left: 10px;
+	margin-right: 10px;
 }
 
-.restaurant-name {
-  color: #624630;
-  font-weight:     400;
-  text-decoration: none;
+.item-name {
+	color: #624630;
+	font-weight: 400;
+	text-decoration: none;
 }
 
-.restaurant-name:hover {
-  text-decoration: underline;
+.item-name:hover {
+	text-decoration: underline;
 }
 
-.restaurant-address {
-  line-height: 20px;
-  padding-right: 20px;
-  text-align: right;
+.item-address {
+	line-height: 20px;
+	padding-right: 20px;
+	text-align: right;
 }
 
 .stars {
-  padding-top: 10px;
+	align-items: center;
+	display: flex;
+	padding-top: 10px;
 }
 
+.fav-link {
+	border-left: 1px solid #FFFFFF;
+	cursor: pointer;
+	line-height: 60px;
+	text-align: center;
+	width: 60px;
+}
+
+.fav-link:hover {
+	color: #F13F3F;
+}
+
+/**
+ * footer section
+ */
 footer {
   background: #434343;
   font-size:  0.8em;

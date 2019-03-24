@@ -28,10 +28,10 @@ public class MySQLTableCreation {
 			
 			// Step 2 Drop tables in case they exist.
 			Statement stmt = conn.createStatement();
-			String sql = "DROP TABLE IF EXISTS categories";
-			stmt.executeUpdate(sql);
+//			String sql = "DROP TABLE IF EXISTS categories";
+//			stmt.executeUpdate(sql);
 			
-			sql = "DROP TABLE IF EXISTS history";
+			String sql = "DROP TABLE IF EXISTS history";
 			stmt.executeUpdate(sql);
 			
 			sql = "DROP TABLE IF EXISTS items";
@@ -41,18 +41,6 @@ public class MySQLTableCreation {
 			stmt.executeUpdate(sql);
 			
 			// Step 3 Create new tables
-			sql = "CREATE TABLE items ("
-					+ "item_id VARCHAR(255) NOT NULL,"
-					+ "name VARCHAR(255),"
-					+ "category VARCHAR(255),"
-					+ "price FLOAT,"
-					+ "image_url VARCHAR(255),"
-					+ "description VARCHAR(255),"
-					+ "approve FLOAT,"
-					+ "PRIMARY KEY (item_id))";
-//					+ "FOREIGN KEY (category) REFERENCES categories(category))";
-			stmt.executeUpdate(sql);
-			
 //			sql = "CREATE TABLE categories ("
 //					+ "item_id VARCHAR(255) NOT NULL,"
 //					+ "category VARCHAR(255) NOT NULL,"
@@ -67,6 +55,19 @@ public class MySQLTableCreation {
 					+ "first_name VARCHAR(255),"
 					+ "last_name VARCHAR(255),"
 					+ "PRIMARY KEY (user_id))";
+			stmt.executeUpdate(sql);
+			
+			sql = "CREATE TABLE items ("
+					+ "item_id VARCHAR(255) NOT NULL,"
+					+ "name VARCHAR(255),"
+					+ "category VARCHAR(255),"
+					+ "price FLOAT,"
+					+ "image_url VARCHAR(255),"
+					+ "description VARCHAR(255),"
+					+ "approve FLOAT,"
+					+ "seller_id VARCHAR(255),"
+					+ "PRIMARY KEY (item_id),"
+					+ "FOREIGN KEY (seller_id) REFERENCES users(user_id))";
 			stmt.executeUpdate(sql);
 			
 			sql = "CREATE TABLE history ("
@@ -90,12 +91,12 @@ public class MySQLTableCreation {
 			stmt.executeUpdate(sql);
 
 			sql = "INSERT INTO items VALUES ("
-					+ "'1', 'iPhoneX', 'electronic device', 1000.0, 'https://cdn.vox-cdn.com/thumbor/4nOocrwrwul2VZax_BdyHyKkDR4=/0x0:2640x1748/1820x1213/filters:focal(1109x663:1531x1085)/cdn.vox-cdn.com/uploads/chorus_image/image/60675421/twarren_iphonesim_1.1533038365.jpg', 'This is an iPhoneX.', 0.0)";
+					+ "'1', 'iPhoneX', 'electronic device', 1000.0, 'https://cdn.vox-cdn.com/thumbor/4nOocrwrwul2VZax_BdyHyKkDR4=/0x0:2640x1748/1820x1213/filters:focal(1109x663:1531x1085)/cdn.vox-cdn.com/uploads/chorus_image/image/60675421/twarren_iphonesim_1.1533038365.jpg', 'This is an iPhoneX.', 0.0, '1111')";
 			System.out.println("Executing query: " + sql);
 			stmt.executeUpdate(sql);
 			
 			sql = "INSERT INTO items VALUES ("
-					+ "'2', 'iClicker', 'electronic device', 20.0, 'https://bloximages.newyork1.vip.townnews.com/purdueexponent.org/content/tncms/assets/v3/editorial/d/25/d25f5715-956a-51fb-a6ab-5f9020e08ec8/4ecb2c760e213.image.jpg?resize=584%2C759', 'This is an iClicker', 1.0)";
+					+ "'2', 'iClicker', 'electronic device', 20.0, 'https://bloximages.newyork1.vip.townnews.com/purdueexponent.org/content/tncms/assets/v3/editorial/d/25/d25f5715-956a-51fb-a6ab-5f9020e08ec8/4ecb2c760e213.image.jpg?resize=584%2C759', 'This is an iClicker', 1.0, 'accepted')";
 			System.out.println("Executing query: " + sql);
 			stmt.executeUpdate(sql);
 
