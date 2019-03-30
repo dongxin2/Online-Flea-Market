@@ -62,6 +62,12 @@ public interface DBConnection {
 	 * @return list of items
 	 */
 	public List<Item> searchItems(String userId);
+	
+	/**
+	 * List ALl items near a geolocation and a term (optional).
+	 * @return list all of items
+	 */
+	public List<Item> listItems();
 
 	/**
 	 * Save item into db.

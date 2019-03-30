@@ -61,6 +61,16 @@ ul {
 	padding-right: 10px;
 }
 
+#login {
+	border-right: 1px solid #FFFFFF;
+	padding-right: 10px;
+}
+
+#signup {
+	border-right: 1px solid #FFFFFF;
+	padding-right: 10px;
+}
+
 /**
  * main container
  */

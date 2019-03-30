@@ -1,20 +1,26 @@
 (function() {
   
 /* step2: variables */
-	var user_id = '1111';
-	var user_fullname = 'John Smith';
-	var lng = -122.08;
-	var lat = 37.38;
+	var user_id = sessionStorage.getItem('user_id'); //'1111';
+	var user_fullname = sessionStorage.getItem('name'); //'John Smith';
+//	var lng = -122.08;
+//	var lat = 37.38;
 
 	/* step3: main function(entrance) */
 	init();
 
 	/* step4: define init function */
 	function init() {
+		var loginMess = document.getElementById('login');
+		if(user_fullname) {
+			loginMess.innerHTML = 'Sign out';
+		}
 		// Register event listeners
 		$('nearby-btn').addEventListener('click', loadNearbyItems);
-//		$('fav-btn').addEventListener('click', loadFavoriteItems);
+		$('fav-btn').addEventListener('click', loadFavoriteItems);
 //		$('recommend-btn').addEventListener('click', loadRecommendedItems);
+//		$('fav-link').addEventListener('click', addFavoriteItems);
+		
 		
 		var welcomeMsg = $('welcome-msg');
         		welcomeMsg.innerHTML = 'Welcome, ' + user_fullname;
@@ -128,7 +134,7 @@
 		});
 	}
 
-		/** step 11: loadNearbyItems function **/
+	/** step 11: loadNearbyItems function **/
 	/**
 	 * API #1 Load the nearby items API end point: [GET]
 	 * /Dashi/search?user_id=1111&lat=37.38&lon=-122.08
@@ -140,7 +146,7 @@
 
 		// The request parameters
 		var url = './search';
-		var params = 'user_id=' + user_id + '&lat=' + lat + '&lon=' + lng;
+		var params = 'user_id=' + user_id + '&term=all';
 		var req = JSON.stringify({});
 
 		// step 13
@@ -166,6 +172,75 @@
 			showErrorMessage('Cannot load nearby items.');
 		});
 	}
+	
+	/** step 18: loadFavoriteItems function **/
+	function loadFavoriteItems() {
+		console.log('loadFavoriteItems');
+		// step 12
+		activeBtn('fav-btn');
+
+		// The request parameters
+		var url = './history';
+		var params = 'user_id=' + user_id ;
+		var req = JSON.stringify({});
+
+		// step 13
+		// display loading message
+		showLoadingMessage('Loading favorite items...');
+
+		// make AJAX call
+		ajax('GET', url + '?' + params, req,
+		// successful callback
+		function(res) {
+			var items = JSON.parse(res);
+			if (!items || items.length === 0) {
+				// step 14
+				showWarningMessage('No favorite item.');
+			} else {
+				// step 16
+				listItems(items);
+			}
+		},
+		// failed callback
+		function() {
+			// step 15
+			showErrorMessage('Cannot load nearby items.');
+		});
+	}
+	
+	/** step 19: addFavoriteItems function **/
+//	function addFavoriteItems() {
+//		console.log('addFavoriteItems');
+//		//TODO
+//		// The request parameters
+//		var url = './history';
+//		var params = 'user_id=' + user_id ;
+//		var req = JSON.stringify({});
+//
+//		// step 13
+//		// display loading message
+//		showLoadingMessage('Loading favorite items...');
+//
+//		// make AJAX call
+//		ajax('GET', url + '?' + params, req,
+//		// successful callback
+//		function(res) {
+//			var items = JSON.parse(res);
+//			if (!items || items.length === 0) {
+//				// step 14
+//				showWarningMessage('No nearby item.');
+//			} else {
+//				// step 16
+//				listItems(items);
+//			}
+//		},
+//		// failed callback
+//		function() {
+//			// step 15
+//			showErrorMessage('Cannot load nearby items.');
+//		});
+//	}
+
 		/** step 12: activeBtn function **/
 	
 	/**
@@ -269,6 +344,21 @@
 		});
 		category.innerHTML = 'Category: ' + item.category;
 		section.appendChild(category);
+		
+		// price
+		var category = $('p', {
+			className : 'item-price'
+		});
+		category.innerHTML = 'Price: ' + item.price;
+		section.appendChild(category);
+		
+		// seller_id
+		console.log(item);
+		var category = $('p', {
+			className : 'seller-id'
+		});
+		category.innerHTML = 'Seller: ' + item.seller_id;
+		section.appendChild(category);
 
 		var stars = $('div', {
 			className : 'stars'
@@ -306,7 +396,8 @@
 		});
 
 		favLink.onclick = function() {
-			changeFavoriteItem(item_id);
+			changeFavoriteItem(item_id, item.favorite);
+			changeIcon('fav-icon-' + item_id);
 		};
 
 		favLink.appendChild($('i', {
@@ -317,6 +408,68 @@
 		li.appendChild(favLink);
 
 		itemList.appendChild(li);
+	}
+	
+	function changeFavoriteItem(item_id, favorite){
+		console.log('changeFavoriteItems');
+		console.log(favorite);
+		// The request parameters
+		var url = './history';
+		var params = 'user_id=' + user_id + '&favorite=' + item_id;
+		var req = JSON.stringify({});
+
+		// step 13
+		// display loading message
+//		showLoadingMessage('Changing favorite items...');
+
+		// make AJAX call
+		if(!favorite){
+			ajax('POST', url + '?' + params, req,
+			// successful callback
+			function(res) {
+				var result = JSON.parse(res);
+				if (result.result == "SUCCESS") {
+					// step 14
+					console.log('Add Item succesfully');
+				} else {
+					// step 16
+					console.log('Add Item unsuccesfully');
+				}
+			},
+			// failed callback
+			function() {
+				// step 15
+				showErrorMessage('Cannot add favorite items.');
+			});
+		} else {
+			ajax('DELETE', url + '?' + params, req,
+			// successful callback
+			function(res) {
+				var result = JSON.parse(res);
+				if (result.result == "SUCCESS") {
+					// step 14
+					console.log('delete Item succesfully');
+				} else {
+					// step 16
+					console.log('delete Item unsuccesfully');
+				}
+			},
+			// failed callback
+			function() {
+				// step 15
+				showErrorMessage('Cannot delete favorite items.');
+			});
+		}
+	}
+	
+	function changeIcon(iconID){
+		console.log(iconID);
+		console.log("this");
+		if($(iconID).className=="fa fa-heart"){
+			$(iconID).className = "fa fa-heart-o";
+		}else{
+			$(iconID).className = "fa fa-heart";
+		}
 	}
 
 

@@ -170,7 +170,7 @@ public class MySQLConnection implements DBConnection{
 	public List<Item> searchItems(String userId) {
 		List<Item> items = new ArrayList<>();
 		Set<String> itemIds = getFavoriteItemIds(userId);
-		System.out.println(userId);
+//		System.out.println(userId);
 		try {
 			String sql = "SELECT * FROM items WHERE seller_id = ?";
 			PreparedStatement stmt = conn.prepareStatement(sql);
@@ -182,7 +182,6 @@ public class MySQLConnection implements DBConnection{
 				ItemBuilder builder = new ItemBuilder();
 				
 				while (rs.next()) {
-					System.out.println(rs.getString("seller_id"));
 					builder.setItemId(rs.getString("item_id"));
 					builder.setName(rs.getString("name"));
 					builder.setCategory(rs.getString("category"));
@@ -196,6 +195,39 @@ public class MySQLConnection implements DBConnection{
 				}
 			}
 		} catch (SQLException e) {
+			System.out.println("Sql request fail");
+			e.printStackTrace();
+		}
+		
+		return items;
+	}
+	
+	@Override
+	public List<Item> listItems() {
+		List<Item> items = new ArrayList<>();
+//		System.out.println(userId);
+		try {
+			String sql = "SELECT * FROM items";
+			PreparedStatement stmt = conn.prepareStatement(sql);
+				
+			ResultSet rs = stmt.executeQuery();
+			
+			ItemBuilder builder = new ItemBuilder();
+			
+			while (rs.next()) {
+				builder.setItemId(rs.getString("item_id"));
+				builder.setName(rs.getString("name"));
+				builder.setCategory(rs.getString("category"));
+				builder.setPrice(rs.getDouble("price"));
+				builder.setImageUrl(rs.getString("image_url"));
+				builder.setDescription(rs.getString("description"));
+				builder.setApprove(rs.getDouble("approve"));
+				builder.setSellerId(rs.getString("seller_id"));
+
+				items.add(builder.build());
+			}
+		} catch (SQLException e) {
+			System.out.println("Sql request fail");
 			e.printStackTrace();
 		}
 		
@@ -247,13 +279,41 @@ public class MySQLConnection implements DBConnection{
 
 	@Override
 	public String getFullname(String userId) {
-		// TODO Auto-generated method stub
-		return null;
+		if (conn == null) {
+			return null;
+		}
+		String name = "";
+		try {
+			String sql = "SELECT first_name, last_name from users WHERE user_id = ?";
+			PreparedStatement statement = conn.prepareStatement(sql);
+			statement.setString(1, userId);
+			ResultSet rs = statement.executeQuery();
+			if (rs.next()) {
+				name = String.join(" ", rs.getString("first_name"), rs.getString("last_name"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return name;
 	}
 
 	@Override
 	public boolean verifyLogin(String userId, String password) {
-		// TODO Auto-generated method stub
+		if (conn == null) {
+			return false;
+		}
+		try {
+			String sql = "SELECT user_id from users WHERE user_id = ? and password = ?";
+			PreparedStatement statement = conn.prepareStatement(sql);
+			statement.setString(1, userId);
+			statement.setString(2, password);
+			ResultSet rs = statement.executeQuery();
+			if (rs.next()) {
+				return true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return false;
 	}
 

@@ -7,16 +7,21 @@
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="styles/main.css">
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   <title>Home Page</title>
 </head>
 <body>
   <header class="top-header">
     <nav class="top-nav">
-      <a href="#">Home</a>
+      <a href="index.html">Home</a>
       <a href="#">Contact</a>
-      <a href="#">About</a>
+      <a href="about.html">About</a>
+      <a href="upload_item.html">Sell</a>
+      <a href="http://localhost:8888/list_view.html">Manager</a>
     </nav>
     <span id="welcome-msg"></span>
+    <a href="login.html" id="login"> Log in</a>
+    <a href="http://localhost:8888/login/login.html" id="signup"> Sign up </a>
     <i id="avatar" class="avatar fa fa-user fa-2x"></i>
   </header>
   <section class="container">
@@ -46,6 +51,8 @@
           <div>
             <a href="#" class="item-name">iPhone XR</a>
             <p class="item-category">electronic device</p>
+            <p class="item-price">1000</p>
+            <p class="seller-id">anonymous</p>
             <div class="stars">
               <i class="fa fa-usd"></i>
               <i class="fa fa-usd"></i>
@@ -63,6 +70,8 @@
           <div>
             <a href="#" class="item-name">iClicker2</a>
             <p class="item-category">Electronic device</p>
+            <p class="item-price">20</p>
+            <p class="seller-id">anonymous</p>
             <div class="stars">
               <i class="fa fa-usd"></i>
               <i class="fa fa-usd"></i>

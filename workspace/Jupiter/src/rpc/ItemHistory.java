@@ -61,19 +61,25 @@ public class ItemHistory extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			JSONObject input = RpcHelper.readJsonObject(request);
-			String userId = input.getString("user_id");
+//			JSONObject input = RpcHelper.readJsonObject(request);
+//			String userId = input.getString("user_id");
+//			
+//			JSONArray array = input.getJSONArray("favorite");
 			
-			JSONArray array = input.getJSONArray("favorite");
+			String userId = (request.getParameter("user_id"));
+			String itemId = (request.getParameter("favorite"));
+			
 			List<String> itemIds = new ArrayList<>();
-			for (int i = 0; i < array.length(); ++i) {
-				itemIds.add(array.get(i).toString());
-			}
+//			for (int i = 0; i < array.length(); ++i) {
+//				itemIds.add(array.get(i).toString());
+//			}
+			itemIds.add(itemId);
 			
 			DBConnection conn = DBConnectionFactory.getConnection();
 			conn.setFavoriteItems(userId, itemIds);
 			conn.close();
-			
+			System.out.println(userId);
+			System.out.println(itemId);
 			RpcHelper.writeJsonObject(response,
 					new JSONObject().put("result", "SUCCESS"));
 		} catch (Exception e) {
@@ -86,14 +92,17 @@ public class ItemHistory extends HttpServlet {
 	 */
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			JSONObject input = RpcHelper.readJsonObject(request);
-			String userId = input.getString("user_id");
+//			JSONObject input = RpcHelper.readJsonObject(request);
+//			String userId = input.getString("user_id");
+			String userId = (request.getParameter("user_id"));
+			String itemId = (request.getParameter("favorite"));
 			
-			JSONArray array = input.getJSONArray("favorite");
+//			JSONArray array = input.getJSONArray("favorite");
 			List<String> itemIds = new ArrayList<>();
-			for (int i = 0; i < array.length(); ++i) {
-				itemIds.add(array.get(i).toString());
-			}
+//			for (int i = 0; i < array.length(); ++i) {
+//				itemIds.add(array.get(i).toString());
+//			}
+			itemIds.add(itemId);
 			
 			DBConnection conn = DBConnectionFactory.getConnection();
 			conn.unsetFavoriteItems(userId, itemIds);
