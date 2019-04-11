@@ -1,0 +1,135 @@
+<head>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+</head>
+<body>
+<nav >Hello</nav>
+    <div id = "data-list">
+        <ul>   </ul>
+    </div>
+    <div id = "page-bar"></div>
+</body>
+<style>
+    #page-bar {
+        text-align: right;
+        padding: 0 20px 20px 0;
+    }
+    .pageBtn a {
+        display: inline-block;
+        border: 1px solid #aaa;
+        padding: 2px 5px;
+        margin : 0 3px;
+        font-size: 13px;
+        background: #ECECEC;
+        color: black;
+        text-decoration: none;
+        -moz-border-radius: 2px;
+        -webkit-border-radius: 3px;
+    }
+    .pageBtn-selected a {
+        display: inline-block;
+        border: 1px solid #aaa;
+        padding: 2px 5px;
+        margin : 0 3px;
+        font-size: 13px;
+        background: #187BBD;
+        color: white;
+        text-decoration: none;
+        -moz-border-radius: 2px;
+        -webkit-border-radius: 3px;
+    }
+    .pageBtn a:hover {
+        background: #187BBD;
+        color: white;
+    }
+    .view-img {
+        width:200px;
+        height:200px;
+    }
+</style>
+<script type="text/javascript">
+    var curPage;
+    var totalItem;
+    var pageSize;
+    var totalPage;
+    function turnPage(page){
+        $.ajax({
+            type:'post',
+            url:'turnpage.php',
+            data:{'pageNum':page},
+            dataType:'json',
+            beforeSend:function () {
+                $("#data-list ul").append("loading...");
+            },
+            success:function(json){
+                console.log(json);
+                $("#data-list ul").empty();
+                totalItem = json.totalItem;
+                pageSize = json.pageSize;
+                curPage = page;
+                totalPage = json.totalPage;
+                var data_content = json.data_content;
+                var data_html = "";
+                $.each(data_content,function (index,array) {
+                    // console.log("this is index");
+                    // console.log(index);
+                    // console.log("this is array");
+                    // console.log(array);
+                    data_html+="<li>" +"<img class = 'view-img' src = "+array['path'] + ">" +"&nbsp;" + array['category'] +"&nbsp;" +array['price'] +"&nbsp;" + array['description'] + "&nbsp;" + array['user-id'] +"</li>";
+                });
+                $("#data-list ul").append(data_html);
+            },
+            complete:function () {
+                getPageBar();
+            },
+            error:function (err) {
+                console.log(err);
+                alert("fail to load data!");
+            }
+        });
+    }
+    function getPageBar() {
+        if(curPage>totalPage){
+            curPage = totalPage;
+        }
+        if(curPage<1)
+            curPage = 1;
+        pageBar = "";
+        if(curPage!=1){
+            pageBar +="<span class='pageBtn'><a href='javascript:turnPage(1)'>Main Page</a></span>";
+            pageBar +="<span class='pageBtn'><a href='javascript:turnPage("+(curPage-1)+")'><<</a></span>";
+        }
+        var start,end;
+        if(totalPage <= 5) {
+            start = 1;
+            end = totalPage;
+        } else {
+            if(curPage-2 <= 0) {
+                start = 1;
+                end = 5;
+            } else {
+                if(totalPage-curPage < 2) {
+                    start = totalPage - 4;
+                    end = totalPage;
+                } else {
+                    start = curPage - 2;
+                    end = curPage + 2;
+                }
+            }
+        }
+        for(var i=start;i<=end;i++) {
+            if(i == curPage) {
+                pageBar += "<span class='pageBtn-selected'><a href='javascript:turnPage("+i+")'>"+i+"</a></span>";
+            } else {
+                pageBar += "<span class='pageBtn'><a href='javascript:turnPage("+i+")'>"+i+"</a></span>";
+            }
+        }
+        if(curPage != totalPage){
+            pageBar += "<span class='pageBtn'><a href='javascript:turnPage("+(parseInt(curPage)+1)+")'>>></a></span>";
+            pageBar += "<span class='pageBtn'><a href='javascript:turnPage("+totalPage+")'>End Page</a></span>";
+        }
+        $("#page-bar").html(pageBar);
+    }
+    $(function () {
+        turnPage(1);
+    });
+</script>

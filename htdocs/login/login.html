@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+        <title>Flea market login or signup</title>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <!--    <script src="./Model.js"></script>-->
+        <style >
+            * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+            }
+        .box {
+            width: 350px;
+            height: 200px;
+            border: 1px solid purple;
+            margin: 5% auto;
+            padding: 2%;
+        }
+
+         .input {
+            height: 30px;
+         }
+
+            .sub, .log {
+                margin-left: 3%;
+                width: 100px;
+                height: 30px;
+            }
+        </style>
+</head>
+<body>
+<div>
+        <div class="box">
+            Username:<input type="text" name="username" id="inname" class="input"> <br><br>
+            Password:<input type="password" name="pwd" id="inpwd" class="input"> <br><br>
+            <input type="submit" value="Signup" class="sub">
+            <button onclick="window.location.href='reset_password.html'">Reset Password</button>
+            <button onclick="window.location.href='http://localhost:8080/Jupiter/'">Back to main page</button>
+        </div>
+        <script>
+        $(document).ready(function () {
+        $(".sub").click(function () {
+            var iname = $("#inname").val();
+            var ipwd = $("#inpwd").val();
+            var data = {
+                name: iname,//变量：值
+                pwd: ipwd
+            };
+            console.log(data);
+            fetch('/login/signup.php',{
+                method:'post',
+                mode: 'no-cors',
+                credentials:'same-origin',
+                headers:{
+                    'Content-Type':'application/json'
+                },
+                body: JSON.stringify(data)
+            }).then(response=>{
+                let clone = response.clone();
+                console.log(clone.text());
+                let resdata = response.json();
+                return resdata;
+            }).then(function(data1){
+                    console.log(1,data1);
+                    alert(data1["msg"])
+                    // if(data1["code"]==1);
+                    // if(data1["code"]==2)
+                })
+                .catch((error)=>{
+                    console.log(error)
+                })
+        })
+        $(".log").click(function () {
+            var iname = $("#inname").val();
+            var ipwd = $("#inpwd").val();
+            var data = {
+                name: iname,//变量：值
+                pwd: ipwd
+            };
+            console.log(data);
+            fetch('/login/login.php',{
+                method:'post',
+                mode: 'no-cors',
+                credentials:'same-origin',
+                headers:{
+                    'Content-Type':'application/json'
+                },
+                body: JSON.stringify(data)
+            }).then(response=>{
+                    let clone = response.clone();
+                    let resdata = response.json();
+                    // console.log(0,resdata);
+                    // console.log(clone.text());
+                    return resdata;
+                }).then(function(data1){
+                    console.log(1,data1);
+                    alert(data1["msg"])
+                    // if(data1["code"]==1);
+                    // if(data1["code"]==2)
+                })
+                .catch((error)=>{
+                    console.log(error)
+                })
+        })
+        })
+            // .then(response=>{
+            //     if (response.status >= 200 && response.status < 300) {
+            //         console.log(response.text());
+            //     }
+            // })
+        // })
+</script>
+</div>
+</body>
+</html>

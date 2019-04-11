@@ -1,0 +1,93 @@
+<head>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+</head>
+<body>
+<div class="box">
+    Category:&nbsp&nbsp<input type="text" id="category" class="input"> <br><br>
+    Price:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="text" name="pwd" id="price" class="input"> <br><br>
+    <form id="uploadForm" enctype="multipart/form-data">
+    <input id="img_input" type="file" accept="image/*"/>
+    </form>
+    Description:<input type="text" id="descrpition" class="input"> <br><br>
+    <input type="submit" value="Submit" class="submit">
+    <div class="preview_box"></div>
+</div>
+<label for="img_input"></label>
+</body>
+<style type="text/css">
+    body {
+        display:flex;
+    }
+    .box {
+        overflow: hidden;
+        width: 300px;
+        height: 400px;
+        margin: auto;
+        padding-top: 50px;
+        padding-left: 50px;
+        border: 1px solid purple;
+        float:left;
+    }
+    .preview_box img{
+        margin: auto;
+        width: 200px;
+        height: 100px;
+    }
+    .input {
+        height: 30px;
+    }
+</style>
+<script type="text/javascript">
+    $(".submit").click(function () {
+        var formData = new FormData();
+        formData.append('img',$('#img_input')[0].files[0]);
+        var file;
+        $.ajax({
+            url: 'upload_file.php',
+            type: 'POST',
+            cache: false,
+            data: formData,
+            processData: false,
+            contentType: false
+        }).done(function (res) {
+            // console.log("success!");
+            // console.log(res);
+            // console.log(file);
+            var catefory = $("#category").val();
+            var price = $("#price").val();
+            var description = $('#descrpition').val();
+            var data = {
+                cate: catefory,
+                pric: price,
+                desc: description,
+                file: res,
+            }
+            const option = {
+                method:'post',
+                mode:'cors',
+                headers:{},
+                body:JSON.stringify(data)
+            };
+            file = res;
+            fetch('/upload_item.php',option).then(response=>{
+                let clone = response.clone();
+                console.log(clone.text());
+                console.log("before is text");
+                let resdata = response.json();
+                return resdata;
+            }).then(function(data1){
+                console.log(1,data1);
+                alert(data1["msg"])
+                // if(data1["code"]==1);
+                // if(data1["code"]==2)
+            })
+                .catch((error)=>{
+                    console.log(error);
+                })
+            console.log(file);
+        }).fail(function (res) {
+            console.log("fail to save");
+            console.log(res);
+        });
+    })
+</script>

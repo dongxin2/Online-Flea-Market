@@ -1,0 +1,22 @@
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.box {
+    width: 350px;
+    height: 200px;
+    border: 1px solid purple;
+    margin: 5% auto;
+    padding: 2%;
+}
+
+.input {
+    height: 30px;
+}
+
+.sub, .log {
+    margin-left: 3%;
+    width: 100px;
+    height: 30px;
+}
