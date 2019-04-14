@@ -1,47 +1,140 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Item Recommendation">
+    <meta name="author" content="Your Name">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="list_view.css">
+    <title>Manege The Items</title>
 </head>
-<style>
-    #page-bar {
-    text-align: right;
-    padding: 0 20px 20px 0;
-    }
-    .pageBtn a {
-    display: inline-block;
-    border: 1px solid #aaa;
-    padding: 2px 5px;
-    margin : 0 3px;
-    font-size: 13px;
-    background: #ECECEC;
-    color: black;
-    text-decoration: none;
-    -moz-border-radius: 2px;
-    -webkit-border-radius: 3px;
-    }
-    .pageBtn-selected a {
-    display: inline-block;
-    border: 1px solid #aaa;
-    padding: 2px 5px;
-    margin : 0 3px;
-    font-size: 13px;
-    background: #187BBD;
-    color: white;
-    text-decoration: none;
-    -moz-border-radius: 2px;
-    -webkit-border-radius: 3px;
-    }
-    .pageBtn a:hover {
-    background: #187BBD;
-    color: white;
-    }
-    .view-img {
-    width:200px;
-    height:200px;
-    }
-</style>
 <body>
+  <!-- <header class="top-header">
+    <nav class="top-nav">
+      <a href="index.html">Home</a>
+      <a href="#">Contact</a>
+      <a href="about.html">About</a>
+      <a href="upload_item.html">Sell</a>
+      <a href="http://localhost:8888/list_view.html">Manager</a>
+    </nav>
+    <span id="welcome-msg"></span>
+    <a href="login.html" id="login"> Log in</a>
+    <a href="http://localhost:8888/login/login.html" id="signup"> Sign up </a>
+    <i id="avatar" class="avatar fa fa-user fa-2x"></i>
+  </header> -->
+  <section class="container">
+    <header>
+      <p><span>Hello!</span><br/>Manage The Items</p>
+    </header>
+    <div class="main-section">
+      <!-- <aside id="item-nav">
+        <div class="nav-icon">
+          <i class="fa fa-shopping-bag fa-2x"></i>
+        </div>
+        <nav class="main-nav">
+          <a href="#" id="nearby-btn" class="main-nav-btn active">
+             <i class="fa fa-map-marker"></i>Nearby
+          </a>
+          <a href="#" id="fav-btn" class="main-nav-btn">
+            <i class="fa fa-heart"></i>My Favorates
+          </a>
+          <a href="#" id="recommend-btn" class="main-nav-btn">
+            <i class="fa fa-thumbs-up"></i>Recommendation
+          </a>
+        </nav>
+      </aside> -->
+    <div class="searcher">
+        <div class="searcher-content">
+            Category:&nbsp&nbsp
+            <select id="category">
+                <option value = "Electrical device">Electrical device</option>
+                <option value = "Clothes">Clothes</option>
+                <option value = "Sports">Sports</option>
+                <option value = "Daily use">Daily use</option>
+                <option value = "Skin care">Skin care</option>
+                <option value = "Accessories">Accessories</option>
+                <option value = "Luggages">Luggages</option>
+                <option value = "Snack">Snack</option>
+                <option value = "Others">Others</option>
+            </select>
+        </div>
+        <div class="searcher-content">
+            <button onclick="searchItems(1)">Let's do some search!</button>
+        </div>
+        <div class="searcher-content">
+            <a href="http://localhost:8888/list_view.html">
+            <button>Cancel</button>
+            </a>
+        </div>
+    </div>
+    <div id = "data-list">
+        <ul>   </ul>
+    </div>
+    <div id = "search-list">
+        <ul>   </ul>
+    </div>
+      <!-- <ul id="item-list">
+        <li class="item">
+          <img alt="item image" src="https://cdn.vox-cdn.com/thumbor/4nOocrwrwul2VZax_BdyHyKkDR4=/0x0:2640x1748/1820x1213/filters:focal(1109x663:1531x1085)/cdn.vox-cdn.com/uploads/chorus_image/image/60675421/twarren_iphonesim_1.1533038365.jpg" />
+          <div>
+            <a href="#" class="item-name">iPhone XR</a>
+            <p class="item-category">electronic device</p>
+            <p class="item-price">1000</p>
+            <p class="seller-id">anonymous</p>
+            <div class="stars">
+              <i class="fa fa-usd"></i>
+              <i class="fa fa-usd"></i>
+              <i class="fa fa-usd"></i>
+              <i class="fa fa-usd"></i>
+            </div>
+          </div>
+          <p class="item-address">Bruce<br/>666@gmail.com<br/> +1 666 666 6666</p>
+          <div class="fav-link">
+            <i class="fa fa-heart"></i>
+          </div>
+        </li>
+        <li class="item">
+          <img alt="item image" src="https://bloximages.newyork1.vip.townnews.com/purdueexponent.org/content/tncms/assets/v3/editorial/d/25/d25f5715-956a-51fb-a6ab-5f9020e08ec8/4ecb2c760e213.image.jpg?resize=584%2C759" />
+          <div>
+            <a href="#" class="item-name">iClicker2</a>
+            <p class="item-category">Electronic device</p>
+            <p class="item-price">20</p>
+            <p class="seller-id">anonymous</p>
+            <div class="stars">
+              <i class="fa fa-usd"></i>
+              <i class="fa fa-usd"></i>
+            </div>
+          </div>
+          <p class="item-address">Alfred<br/>6666@gmail.com<br/> +1 666 666 6666</p>
+          <div class="fav-link">
+            <i class="fa fa-heart"></i>
+          </div>
+        </li>
+      </ul> -->
+    </div>
+  </section>
+    <footer>
+    <p class="title">What We Do</p>
+    <p>"Help you find the cheapest around."</p>
+    <ul>
+      <li>
+        <p><i class="fa fa-map-o fa-2x"></i></p>
+        <p>University of Illinois, IL</p>
+      </li>
+      <li>
+        <p><i class="fa fa-envelope-o fa-2x"></i></p>
+        <p>info@gmail.com</p>
+      </li>
+      <li>
+        <p><i class="fa fa-phone fa-2x"></i></p>
+        <p>+1 666 666 666</p>
+      </li>
+    </ul>
+  </footer>
+</body>
+<!-- <body>
 <nav >Hello</nav>
 <div class="searcher">
 Category:<select id="category">
@@ -75,7 +168,7 @@ Category:<select id="category">
         <input type="submit" value="go!" />
     </form>
     <div id = "page-bar"></div>
-</body>
+</body> -->
 <script type="text/javascript">
     var curPage;
     var totalItem;

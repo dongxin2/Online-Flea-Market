@@ -162,11 +162,11 @@ ul {
  * item list
  */
 
-#item-list {
+#item-list{
 	background: #F2EBD9;
 	color: #624630;
 	list-style: none;
-	margin-left: 180px;
+	/* margin-left: 180px; */
 	min-height: 250px;
 	padding: 10px;
 }
@@ -269,4 +269,40 @@ footer ul {
 
 footer ul li {
    flex: 1;
+}
+
+.searcher {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;
+    font-style:italic;
+    padding: 1em;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.searcher-content{
+    margin: 0.2em 0.5em;
+}
+
+.searcher-content button {
+    padding-left: 0.3em;
+    padding-right: 0.3em;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    cursor: pointer;
+    background-color: white; 
+    color: black; 
+    border: solid  rgb(231, 211, 30);
+    border-radius: 8px;
+}
+
+.searcher-content button:hover {
+    background-color: #008CBA;
+    color: white;
+    border: solid #008CBA;
 }
