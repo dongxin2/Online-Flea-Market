@@ -1,9 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="styles/upload_item.css">
 </head>
 <body>
-<div class="box">
-    10Name:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="text" name="pwd" id="name" class="input"> <br><br>
+    <div>
+        <div class="box">
+            <div class="box-header">
+                <h2 style="color: white; opacity: .65; font-size: 4rem; display: flex; justify-content: center; align-items: center; height: 100%;">UPLOAD</h2>
+            </div>
+            <div class="box-body">
+                <form id="form" class="form-container">
+                <label class="form-input">
+                    <i class="material-icons">casino</i>
+                    <input type="text" name="pwd" id="name" class="input" autofocus="true" required />
+                    <span class="label">Item Name</span>
+                    <span class="underline"></span>
+                </label>
+                <label class="form-input">
+                    <i class="material-icons">money</i>
+                    <input type="text" name="pwd" id="price" class="input" required />
+                    <span class="label">Price</span>
+                    <div class="underline"></div>
+                </label>
+                <label class="form-input">
+                        <i class="material-icons">short_text</i>
+                        <input type="text" name="pwd" id="descrpition" class="input" required />
+                        <span class="label">Description</span>
+                        <div class="underline"></div>
+                </label>
+                <!-- The funtcion input is newly added -->
+                <label class="form-input">
+                    <i class="material-icons">functions</i>
+                    <input type="text" name="pwd" id="function" class="input" required />
+                    <span class="label">Function</span>
+                    <div class="underline"></div>
+                </label>
+                </form>
+                <br>
+                <div class="custom-select">
+                    Category:&nbsp&nbsp
+                    <select id="category" style="width:200px;">
+                        <option value = "Electrical device">Electrical device</option>
+                        <option value = "Clothes">Clothes</option>
+                        <option value = "Sports">Sports</option>
+                        <option value = "Daily use">Daily use</option>
+                        <option value = "Skin care">Skin care</option>
+                        <option value = "Accessories">Accessories</option>
+                        <option value = "Luggages">Luggages</option>
+                        <option value = "Snack">Snack</option>
+                        <option value = "Others">Others</option>
+                    </select><br><br>
+                </div>
+                <div class="img-container">
+                    <form id="uploadForm" enctype="multipart/form-data">
+                    Upload Image: &nbsp&nbsp
+                    <input id="img_input" type="file" accept="image/*" value="upload image"/>
+                    </form>
+                </div>
+                <br><br>
+                <div class="button-container">
+                        <input type="submit" value="Submit" class="sub">
+                        <button onclick="window.location.href='http://localhost:8080/Jupiter/'", class="sub2">Main page</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<!-- <div class="box">
+    Name:&nbsp&nbsp<input type="text" name="pwd" id="name" class="input"> <br><br>
     Category:&nbsp&nbsp<select id="category">
     <option value = "Electrical device">Electrical device</option>
     <option value = "Clothes">Clothes</option>
@@ -15,8 +81,7 @@
     <option value = "Snack">Snack</option>
     <option value = "Others">Others</option>
   </select><br><br>
-    Price:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="text" name="pwd" id="price" class="input"> <br><br>
-
+    Price:&nbsp&nbsp<input type="text" name="pwd" id="price" class="input"> <br><br>
     <form id="uploadForm" enctype="multipart/form-data">
     <input id="img_input" type="file" accept="image/*"/>
     </form>
@@ -25,31 +90,8 @@
     <span class='pageBtn'><a href='http://localhost:8080/Jupiter/'>Home Page</a></span>
     <div class="preview_box"></div>
 </div>
-<label for="img_input"></label>
-</body>
-<style type="text/css">
-    body {
-        display:flex;
-    }
-    .box {
-        overflow: hidden;
-        width: 300px;
-        height: 400px;
-        margin: auto;
-        padding-top: 50px;
-        padding-left: 50px;
-        border: 1px solid purple;
-        float:left;
-    }
-    .preview_box img{
-        margin: auto;
-        width: 200px;
-        height: 100px;
-    }
-    .input {
-        height: 30px;
-    }
-</style>
+<label for="img_input"></label> -->
+
 <script type="text/javascript">
     $(".submit").click(function () {
         var formData = new FormData();
@@ -110,3 +152,4 @@
         });
     })
 </script>
+</html>
