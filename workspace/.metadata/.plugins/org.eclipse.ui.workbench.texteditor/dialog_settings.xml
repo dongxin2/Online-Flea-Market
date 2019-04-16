@@ -2,27 +2,27 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="fetch" key="selection"/>
+		<item value="HashSet" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
-			<item value="fetch"/>
-			<item value="verifyLogin"/>
-			<item value="ajax"/>
-			<item value="showLoading"/>
-			<item value="show"/>
-			<item value="loadNearbyItems"/>
-			<item value="fullname"/>
-			<item value="btn"/>
-			<item value="addEventListener"/>
-			<item value="loadRecommendedItems"/>
-			<item value="login"/>
-			<item value="user"/>
+			<item value="hashset"/>
+			<item value="System"/>
 			<item value="system"/>
-			<item value="seller"/>
+			<item value="users"/>
+			<item value="loadRecommendedItems"/>
 			<item value="loadFavoriteItems"/>
+			<item value="userId"/>
+			<item value="getFavoriteItems"/>
+			<item value="ajax"/>
+			<item value="agax"/>
+			<item value="href"/>
+			<item value="20"/>
+			<item value="addItem"/>
+			<item value="item"/>
+			<item value="load"/>
 		</list>
 		<list key="replacehistory">
 		</list>
@@ -31,7 +31,7 @@
 		<item value="294" key="DIALOG_WIDTH"/>
 		<item value="1|.AppleSystemUIFont|11.0|0|COCOA|1|.AppleSystemUIFont" key="DIALOG_FONT_NAME"/>
 		<item value="408" key="DIALOG_HEIGHT"/>
-		<item value="993" key="DIALOG_X_ORIGIN"/>
+		<item value="1205" key="DIALOG_X_ORIGIN"/>
 		<item value="174" key="DIALOG_Y_ORIGIN"/>
 	</section>
 </section>

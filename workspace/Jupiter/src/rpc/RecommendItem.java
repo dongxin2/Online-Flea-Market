@@ -2,6 +2,7 @@ package rpc;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Set;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,6 +13,10 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import db.DBConnection;
+import db.DBConnectionFactory;
+import entity.Item;
 
 /**
  * Servlet implementation class RecommendItem
@@ -32,14 +37,19 @@ public class RecommendItem extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String userId = request.getParameter("user_id");
 		JSONArray array = new JSONArray();
-		try {
-			array.put( new JSONObject().put("name", "John")
-					.put("desk", "20").put("computer", "500") );
-			array.put( new JSONObject().put("name", "Alice")
-					.put("vacuum", "20").put("doll", "5"));
-		} catch(JSONException e) {
-			e.printStackTrace();
+
+		DBConnection conn = DBConnectionFactory.getConnection();
+		Set<Item> items = conn.getRecommendations(userId);
+		for (Item item : items) {
+			JSONObject obj = item.toJSONObject();
+			try {
+				obj.append("favorite", true);
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+			array.put(obj);
 		}
 		RpcHelper.writeJsonArray(response, array);
 	}

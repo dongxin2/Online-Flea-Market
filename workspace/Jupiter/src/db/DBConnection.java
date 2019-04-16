@@ -94,5 +94,23 @@ public interface DBConnection {
 	 * @return boolean
 	 */
 	public boolean verifyLogin(String userId, String password);
+	
+	/**
+	 * Get the recommend item id for a user.
+	 * 
+	 * @param itemId
+	 * @return itemIds
+	 */
+	public Set<String> getRecommendItemIds(String itemId);
+	
+	/**
+	 * Return recommended items for the user 
+	 * according to the itemIds 
+	 * 
+	 * @param userId
+	 * @param itemId
+	 * @return items
+	 */
+	public Set<Item> getRecommendations(String userId);
 }
 

@@ -18,7 +18,7 @@
 		// Register event listeners
 		$('nearby-btn').addEventListener('click', loadNearbyItems);
 		$('fav-btn').addEventListener('click', loadFavoriteItems);
-//		$('recommend-btn').addEventListener('click', loadRecommendedItems);
+		$('recommend-btn').addEventListener('click', loadRecommendedItems);
 //		$('fav-link').addEventListener('click', addFavoriteItems);
 		
 		
@@ -187,6 +187,41 @@
 		// step 13
 		// display loading message
 		showLoadingMessage('Loading favorite items...');
+
+		// make AJAX call
+		ajax('GET', url + '?' + params, req,
+		// successful callback
+		function(res) {
+			var items = JSON.parse(res);
+			if (!items || items.length === 0) {
+				// step 14
+				showWarningMessage('No favorite item.');
+			} else {
+				// step 16
+				listItems(items);
+			}
+		},
+		// failed callback
+		function() {
+			// step 15
+			showErrorMessage('Cannot load nearby items.');
+		});
+	}
+	
+	/** step 20: loadRecommendedItems function **/
+	function loadRecommendedItems() {
+		console.log('loadRecommendedItems');
+		// step 12
+		activeBtn('recommend-btn');
+
+		// The request parameters
+		var url = './recommendation';
+		var params = 'user_id=' + user_id ;
+		var req = JSON.stringify({});
+
+		// step 13
+		// display loading message
+		showLoadingMessage('Loading recommend items...');
 
 		// make AJAX call
 		ajax('GET', url + '?' + params, req,

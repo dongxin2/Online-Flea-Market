@@ -41,6 +41,12 @@ public class MySQLTableCreation {
 			sql = "DROP TABLE IF EXISTS users";
 			stmt.executeUpdate(sql);
 			
+			sql = "DROP TABLE IF EXISTS recommand";
+			stmt.executeUpdate(sql);
+			
+			sql = "DROP TABLE IF EXISTS recommend";
+			stmt.executeUpdate(sql);
+			
 			// Step 3 Create new tables
 //			sql = "CREATE TABLE categories ("
 //					+ "item_id VARCHAR(255) NOT NULL,"
@@ -65,6 +71,7 @@ public class MySQLTableCreation {
 					+ "price FLOAT,"
 					+ "image_url VARCHAR(255),"
 					+ "description VARCHAR(255),"
+					+ "function VARCHAR(255),"
 					+ "approve FLOAT DEFAULT 0,"
 					+ "seller_id VARCHAR(255),"
 					+ "PRIMARY KEY (item_id),"
@@ -78,6 +85,21 @@ public class MySQLTableCreation {
 					+ "PRIMARY KEY (user_id, item_id),"
 					+ "FOREIGN KEY (item_id) REFERENCES items(item_id),"
 					+ "FOREIGN KEY (user_id) REFERENCES users(user_id))";
+			stmt.executeUpdate(sql);
+			
+			sql = "CREATE TABLE recommend ("
+					+ "item_id INT NOT NULL,"
+					+ "item1 INT,"
+					+ "item2 INT,"
+					+ "item3 INT,"
+					+ "item4 INT,"
+					+ "item5 INT,"
+					+ "item6 INT,"
+					+ "item7 INT,"
+					+ "item8 INT,"
+					+ "item9 INT,"
+					+ "item10 INT,"
+					+ "PRIMARY KEY (item_id))";
 			stmt.executeUpdate(sql);
 			
 			// Step 4: insert data
@@ -107,12 +129,12 @@ public class MySQLTableCreation {
 			stmt.executeUpdate(sql);
 
 			sql = "INSERT INTO items VALUES ("
-					+ "'1', 'iPhoneX', 'Electronic device', 1000.0, 'https://cdn.vox-cdn.com/thumbor/4nOocrwrwul2VZax_BdyHyKkDR4=/0x0:2640x1748/1820x1213/filters:focal(1109x663:1531x1085)/cdn.vox-cdn.com/uploads/chorus_image/image/60675421/twarren_iphonesim_1.1533038365.jpg', 'This is an iPhoneX.', 0.0, 'accepted')";
+					+ "'1', 'iPhoneX', 'Electrical device', 1000.0, 'https://cdn.vox-cdn.com/thumbor/4nOocrwrwul2VZax_BdyHyKkDR4=/0x0:2640x1748/1820x1213/filters:focal(1109x663:1531x1085)/cdn.vox-cdn.com/uploads/chorus_image/image/60675421/twarren_iphonesim_1.1533038365.jpg', 'This is an iPhoneX.', 'phone', 0.0, 'accepted')";
 			System.out.println("Executing query: " + sql);
 			stmt.executeUpdate(sql);
 			
-			sql = "INSERT INTO items (name, category, price, image_url, description, approve, seller_id) VALUES ("
-					+ " 'iClicker', 'Electronic device', 20.0, 'https://bloximages.newyork1.vip.townnews.com/purdueexponent.org/content/tncms/assets/v3/editorial/d/25/d25f5715-956a-51fb-a6ab-5f9020e08ec8/4ecb2c760e213.image.jpg?resize=584%2C759', 'This is an iClicker', 1.0, 'accepted')";
+			sql = "INSERT INTO items (name, category, price, image_url, description, function, approve, seller_id) VALUES ("
+					+ " 'iClicker', 'Electrical device', 20.0, 'https://bloximages.newyork1.vip.townnews.com/purdueexponent.org/content/tncms/assets/v3/editorial/d/25/d25f5715-956a-51fb-a6ab-5f9020e08ec8/4ecb2c760e213.image.jpg?resize=584%2C759', 'This is an iClicker', 'education', 1.0, 'accepted')";
 			System.out.println("Executing query: " + sql);
 			stmt.executeUpdate(sql);
 			
@@ -184,6 +206,36 @@ public class MySQLTableCreation {
 			System.out.println("Executing query: " + sql);
 			stmt.executeUpdate(sql);
 			
+			sql = "INSERT INTO items (name, category, price, image_url, description, function, approve, seller_id) VALUES ('Lancome''s LIGHT DAY CREAM', 'Skin care', 99, 'https://i.imgur.com/DYZKrL8.jpg', 'multi-action light day cream', ' lifts and tightens all facial zones, blending seamlessly into the skin for a refined, new softness.', 1, 'younand2')";
+			System.out.println("Executing query: " + sql);
+			stmt.executeUpdate(sql);
+			sql = "INSERT INTO items (name, category, price, image_url, description, function, approve, seller_id) VALUES ('Lancome''s UV EXPERT AQUAGEL SUNSCREEN', 'Skin care', 39, 'https://i.imgur.com/yCsTFWC.jpg', 'an all-in-one, oil-free face primer and moisturizer with spf 50', 'gives lasting hydration and helps protect skin from external aggressors such as sun damage.', 1, 'younand2')";
+			System.out.println("Executing query: " + sql);
+			stmt.executeUpdate(sql);
+			sql = "INSERT INTO items (name, category, price, image_url, description, function, approve, seller_id) VALUES ('Lancome''s VISIONNAIRE ADVANCED SKIN', 'Skin care', 93, 'https://i.imgur.com/vQ8nU1v.jpg', 'a fresh, fast-absorbing serum', 'instantly smooths skin''s surface after one application', 1, 'younand2')";
+			System.out.println("Executing query: " + sql);
+			stmt.executeUpdate(sql);
+			sql = "INSERT INTO items (name, category, price, image_url, description, function, approve, seller_id) VALUES ('Lancome''s ABSOLUE REVITALIZING & BRIGHTENING SOFT CREAM', 'Skin care', 120, 'https://i.imgur.com/xiG5Z5C.jpg', 'a soft cream facial moisturizer with a unique, transforming texture', 'visibly reduces fine lines and wrinkles, while rejuvenating skin with firmness, radiance and 24-hour hydration.', 1, 'younand2')";
+			System.out.println("Executing query: " + sql);
+			stmt.executeUpdate(sql);
+			sql = "INSERT INTO items (name, category, price, image_url, description, function, approve, seller_id) VALUES ('Lancome''s YOUTH ACTIVATING SERUM', 'Skin care', 178, 'https://i.imgur.com/pAyKgqt.jpg', 'a fast-acting anti-aging serum', 'reveals smoother, more radiant skin in as little as 7 days', 1, 'younand2')";
+			System.out.println("Executing query: " + sql);
+			stmt.executeUpdate(sql);
+			sql = "INSERT INTO items (name, category, price, image_url, description, function, approve, seller_id) VALUES ('Lancome''s BIENFAIT MULTI-VITAL SPF 30 DAY CREAM', 'Skin care', 50, 'https://i.imgur.com/ccHvOyb.jpg', 'containing a complex of nurturing vitamins e, b5 and cg plus high potency moisturization', 'help fight the visible effects of environmental skin damage', 1, 'younand2')";
+			System.out.println("Executing query: " + sql);
+			stmt.executeUpdate(sql);
+			sql = "INSERT INTO items (name, category, price, image_url, description, function, approve, seller_id) VALUES ('Lancome''s VISIONNAIRE NUIT NIGHT CREAM', 'Skin care', 92, 'https://i.imgur.com/llGSCLC.jpg', 'a gel-to-oil beauty sleep perfecting night moisturizer', 'visibly nourishes skin, refines texture and pores, for skin that is smoother, softer, and bouncy', 1, 'younand2')";
+			System.out.println("Executing query: " + sql);
+			stmt.executeUpdate(sql);
+			sql = "INSERT INTO items (name, category, price, image_url, description, function, approve, seller_id) VALUES ('Lancome''s ABSOLUE L’EXTRAIT CREAM ELIXIR REFILL', 'Skin care', 315, 'https://i.imgur.com/Z9AUNRk.jpg', 'contains up to 2 million lancome rose native cells', 'helps reveal firmer, more elastic, more radiant skin for fascinating beauty', 1, 'younand2')";
+			System.out.println("Executing query: " + sql);
+			stmt.executeUpdate(sql);
+			sql = "INSERT INTO items (name, category, price, image_url, description, function, approve, seller_id) VALUES ('Lancome''s MULTI-GLOW', 'Skin care', 99, 'https://i.imgur.com/UfApQ7n.jpg', 'moisturizer', 'lifts and plumps the skin', 1, 'younand2')";
+			System.out.println("Executing query: " + sql);
+			stmt.executeUpdate(sql);
+			sql = "INSERT INTO items (name, category, price, image_url, description, function, approve, seller_id) VALUES ('Lancome''s DAILY REPLENISHING OIL', 'Skin care', 54, 'https://i.imgur.com/EUrSZVC.jpg', 'a healing, blend of botanical essences', 'helps skin retain moisture,brightens the skin and leaves a youthful, lit from within look', 1, 'younand2')";
+			System.out.println("Executing query: " + sql);
+			stmt.executeUpdate(sql);
 			
 			//insert into history
 			sql = "INSERT INTO history (user_id, item_id) VALUES ("
@@ -193,6 +245,17 @@ public class MySQLTableCreation {
 			
 			sql = "INSERT INTO history (user_id, item_id) VALUES ("
 					+ "'accepted', 2)";
+			System.out.println("Executing query: " + sql);
+			stmt.executeUpdate(sql);
+			
+			//insert into recommend
+			sql = "INSERT INTO recommend (item_id, item1, item2) VALUES ("
+					+ "1, 3, 4)";
+			System.out.println("Executing query: " + sql);
+			stmt.executeUpdate(sql);
+			
+			sql = "INSERT INTO recommend (item_id, item1, item2) VALUES ("
+					+ "2, 5, 6)";
 			System.out.println("Executing query: " + sql);
 			stmt.executeUpdate(sql);
 

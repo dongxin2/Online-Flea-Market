@@ -207,7 +207,7 @@ public class MySQLConnection implements DBConnection{
 		List<Item> items = new ArrayList<>();
 //		System.out.println(userId);
 		try {
-			String sql = "SELECT * FROM items";
+			String sql = "SELECT * FROM items WHERE approve = 1";
 			PreparedStatement stmt = conn.prepareStatement(sql);
 				
 			ResultSet rs = stmt.executeQuery();
@@ -315,6 +315,87 @@ public class MySQLConnection implements DBConnection{
 			e.printStackTrace();
 		}
 		return false;
+	}
+	
+	@Override
+	public Set<String> getRecommendItemIds(String itemId) {
+		if (conn == null) {
+			return new HashSet<>();
+		}
+		
+		Set<String> favoriteItemIds = new HashSet<>();
+		
+		try {
+			String sql = "SELECT * from recommend where item_id = ?";
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setString(1, itemId);
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				String item = rs.getString("item1");
+				favoriteItemIds.add(item);
+				
+				item = rs.getString("item2");
+				favoriteItemIds.add(item);
+				
+				item = rs.getString("item3");
+				favoriteItemIds.add(item);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return favoriteItemIds;
+	}
+	
+	@Override
+	public Set<Item> getRecommendations(String userId) {
+		if (conn == null) {
+			return new HashSet<>();
+		}
+		
+		Set<String> exist = new HashSet<>();
+		Set<Item> recommendItems = new HashSet<>();
+		Set<String> itemIds = getFavoriteItemIds(userId);
+//		System.out.println(itemIds);
+		
+		try {
+			String sql = "SELECT * FROM items WHERE item_id = ?";
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			for (String itemId : itemIds) {
+				Set<String> items = getRecommendItemIds(itemId);
+				
+				for(String item : items) {
+					stmt.setString(1, item);
+					
+					ResultSet rs = stmt.executeQuery();
+					
+					ItemBuilder builder = new ItemBuilder();
+					
+					while (rs.next()) {
+						if(exist.contains(rs.getString("item_id"))) {
+							continue;
+						}
+						exist.add(rs.getString("item_id"));
+						builder.setItemId(rs.getString("item_id"));
+						builder.setName(rs.getString("name"));
+						builder.setCategory(rs.getString("category"));
+						builder.setPrice(rs.getDouble("price"));
+						builder.setImageUrl(rs.getString("image_url"));
+						builder.setDescription(rs.getString("description"));
+						builder.setApprove(rs.getDouble("approve"));
+						builder.setSellerId(rs.getString("seller_id"));
+
+						recommendItems.add(builder.build());
+					}
+				}
+				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return recommendItems;
 	}
 
 }
