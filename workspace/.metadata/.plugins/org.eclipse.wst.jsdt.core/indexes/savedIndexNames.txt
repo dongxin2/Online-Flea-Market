@@ -1,9 +1,6 @@
 INDEX VERSION 1.4+/Users/dongxinzhu/Documents/411 Web Project/workspace/.metadata/.plugins/org.eclipse.wst.jsdt.core/indexes
 4006005961.index
-583484942.index
 2533489953.index
-3026521838.index
 979660208.index
 4027922781.index
 772526263.index
-583484942.index
