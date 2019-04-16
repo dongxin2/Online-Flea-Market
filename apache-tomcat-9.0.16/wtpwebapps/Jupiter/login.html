@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Flea market login or signup</title>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <!--    <script src="./Model.js"></script>-->
+    <style >
+            * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+            }
+        .box {
+            width: 350px;
+            height: 200px;
+            border: 1px solid purple;
+            margin: 5% auto;
+            padding: 2%;
+        }
+
+         .input {
+            height: 30px;
+         }
+
+            .sub, .log {
+                margin-left: 3%;
+                width: 100px;
+                height: 30px;
+            }
+        </style>
+</head>
+<body>
+<div>
+        <div class="box">
+            Username:<input type="text" name="username" id="inname" class="input"> <br><br>
+            Password:<input type="password" name="pwd" id="inpwd" class="input"> <br><br>
+            <input id="login-btn" type="submit" value="Login" class="log">
+        </div>
+        
+</div>
+<script src="https://rawgit.com/emn178/js-md5/master/build/md5.min.js"></script>
+<script src="scripts/login.js"></script>
+</body>
+</html>

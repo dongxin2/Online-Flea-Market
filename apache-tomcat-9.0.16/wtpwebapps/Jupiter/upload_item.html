@@ -1,0 +1,112 @@
+<head>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+</head>
+<body>
+<div class="box">
+    Name:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="text" name="pwd" id="name" class="input"> <br><br>
+    Category:&nbsp&nbsp<select id="category">
+    <option value = "Electrical device">Electrical device</option>
+    <option value = "Clothes">Clothes</option>
+    <option value = "Sports">Sports</option>
+    <option value = "Daily use">Daily use</option>
+    <option value = "Skin care">Skin care</option>
+    <option value = "Accessories">Accessories</option>
+    <option value = "Luggages">Luggages</option>
+    <option value = "Snack">Snack</option>
+    <option value = "Others">Others</option>
+  </select><br><br>
+    Price:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="text" name="pwd" id="price" class="input"> <br><br>
+
+    <form id="uploadForm" enctype="multipart/form-data">
+    <input id="img_input" type="file" accept="image/*"/>
+    </form>
+    Description:<input type="text" id="descrpition" class="input"> <br><br>
+    <input type="submit" value="Submit" class="submit">
+    <span class='pageBtn'><a href='http://localhost:8080/Jupiter/'>Home Page</a></span>
+    <div class="preview_box"></div>
+</div>
+<label for="img_input"></label>
+</body>
+<style type="text/css">
+    body {
+        display:flex;
+    }
+    .box {
+        overflow: hidden;
+        width: 300px;
+        height: 400px;
+        margin: auto;
+        padding-top: 50px;
+        padding-left: 50px;
+        border: 1px solid purple;
+        float:left;
+    }
+    .preview_box img{
+        margin: auto;
+        width: 200px;
+        height: 100px;
+    }
+    .input {
+        height: 30px;
+    }
+</style>
+<script type="text/javascript">
+    $(".submit").click(function () {
+        var formData = new FormData();
+        formData.append('img',$('#img_input')[0].files[0]);
+        var file;
+        $.ajax({
+            url: 'http://localhost:8888/upload_file.php',
+            type: 'POST',
+            crossDomain: true,
+            cache: false,
+            data: formData,
+            processData: false,
+            contentType: false
+        }).done(function (res) {
+            console.log("success!");
+            console.log(res);
+            // console.log(file);
+            var user_id = sessionStorage.getItem('user_id');
+            var name = $("#name").val();
+            var catefory = $("#category").val();
+            var price = $("#price").val();
+            var description = $('#descrpition').val();
+            var data = {
+            	seller:user_id,
+                name: name,
+                cate: catefory,
+                pric: price,
+                desc: description,
+                file: res,
+            }
+            // res.console.log();
+            const option = {
+                method:'post',
+                mode:'cors',
+                headers:{},
+                body:JSON.stringify(data)
+            };
+            // file = res;
+            fetch('http://localhost:8888//upload_item.php',option).then(response=>{
+                let clone = response.clone();
+                console.log(clone.text());
+                console.log("before is text");
+                let resdata = response.json();
+                return resdata;
+            }).then(function(data1){
+                console.log(1,data1);
+                alert(data1["msg"])
+                // if(data1["code"]==1);
+                // if(data1["code"]==2)
+            })
+                .catch((error)=>{
+                    console.log(error);
+                })
+            // console.log(file);
+        }).fail(function (res) {
+            console.log("fail to save");
+            console.log(res);
+        });
+    })
+</script>
