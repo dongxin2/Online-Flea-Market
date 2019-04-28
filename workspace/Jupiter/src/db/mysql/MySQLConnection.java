@@ -339,6 +339,24 @@ public class MySQLConnection implements DBConnection{
 				
 				item = rs.getString("item3");
 				favoriteItemIds.add(item);
+				
+				item = rs.getString("item4");
+				favoriteItemIds.add(item);
+				
+				item = rs.getString("item5");
+				favoriteItemIds.add(item);
+				
+				item = rs.getString("item6");
+				favoriteItemIds.add(item);
+				
+				item = rs.getString("item7");
+				favoriteItemIds.add(item);
+				
+				item = rs.getString("item8");
+				favoriteItemIds.add(item);
+				
+				item = rs.getString("item9");
+				favoriteItemIds.add(item);
 			}
 			
 		} catch (SQLException e) {
@@ -364,8 +382,9 @@ public class MySQLConnection implements DBConnection{
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			for (String itemId : itemIds) {
 				Set<String> items = getRecommendItemIds(itemId);
-				
+//				System.out.println(itemId);
 				for(String item : items) {
+//					System.out.println(item);
 					stmt.setString(1, item);
 					
 					ResultSet rs = stmt.executeQuery();
@@ -389,7 +408,7 @@ public class MySQLConnection implements DBConnection{
 						recommendItems.add(builder.build());
 					}
 				}
-				
+//				System.out.println();
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

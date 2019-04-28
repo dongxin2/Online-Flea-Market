@@ -55,7 +55,7 @@
                 </div>
                 <div class="img-container">
                     <form id="uploadForm" enctype="multipart/form-data">
-                    Upload Image: &nbsp&nbsp
+                    your Upload Image: &nbsp&nbsp
                     <input id="img_input" type="file" accept="image/*" value="upload image"/>
                     </form>
                 </div>
@@ -93,7 +93,7 @@
 <label for="img_input"></label> -->
 
 <script type="text/javascript">
-    $(".submit").click(function () {
+    $(".sub").click(function () {
         var formData = new FormData();
         formData.append('img',$('#img_input')[0].files[0]);
         var file;
@@ -131,20 +131,45 @@
             };
             // file = res;
             fetch('http://localhost:8888//upload_item.php',option).then(response=>{
-                let clone = response.clone();
-                console.log(clone.text());
-                console.log("before is text");
-                let resdata = response.json();
+                resdata = response.json();
                 return resdata;
             }).then(function(data1){
-                console.log(1,data1);
-                alert(data1["msg"])
+ //               console.log(1,data1);
+                alert(data1["msg"]);
                 // if(data1["code"]==1);
                 // if(data1["code"]==2)
             })
-                .catch((error)=>{
-                    console.log(error);
-                })
+            // console.log(file);
+        }).fail(function (res) {
+            console.log("fail to save");
+            console.log(res);
+        });
+        $.ajax({
+            url: 'http://localhost:8888//sendinput.php',
+            type: 'POST',
+            crossDomain: true,
+            async:false,
+            cache: false,
+            data: formData,
+            processData: false,
+            contentType: false
+        }).done(function (res) {
+        	console.log(res);
+        	console.log("update item data!");
+            const option = {
+                method:'post',
+                mode:'cors',
+                headers:{},
+                body:JSON.stringify("")
+            };
+          // ignore_user_abort(1); // run script in background
+          // set_time_limit(500); // run script forever
+          fetch('http://localhost:8888//findrecommand.php',option).then(response=>{
+  					console.log("Im here!");
+          })
+          .catch((error)=>{
+              console.log(error);
+          })
             // console.log(file);
         }).fail(function (res) {
             console.log("fail to save");

@@ -123,86 +123,117 @@ public class MySQLTableCreation {
 			System.out.println("Executing query: " + sql);
 			stmt.executeUpdate(sql);
 			
+			//Insert
+			sql = "INSERT INTO users VALUES ("
+					+ "'wei2', '666666', 1.0, 'Victor', 'Ren')";
+			System.out.println("Executing query: " + sql);
+			stmt.executeUpdate(sql);
+			
+			sql = "INSERT INTO users VALUES ("
+					+ "'xjue7', '666666', 1.0, 'Xiangjue', 'Dong')";
+			System.out.println("Executing query: " + sql);
+			stmt.executeUpdate(sql);
+			
+			sql = "INSERT INTO users VALUES ("
+					+ "'yu7', '666666', 1.0, 'Shuiling', 'Yu')";
+			System.out.println("Executing query: " + sql);
+			stmt.executeUpdate(sql);
+			
+			sql = "INSERT INTO users VALUES ("
+					+ "'yufeng4', '666666', 1.0, 'Yufeng', 'Zhang')";
+			System.out.println("Executing query: " + sql);
+			stmt.executeUpdate(sql);
+			
+			sql = "INSERT INTO users VALUES ("
+					+ "'qdliu', '666666', 1.0, 'Qiangdong', 'Liu')";
+			System.out.println("Executing query: " + sql);
+			stmt.executeUpdate(sql);
+			
+			sql = "INSERT INTO users VALUES ("
+					+ "'zheliu3', '666666', 1.0, 'Zhe', 'Liu')";
+			System.out.println("Executing query: " + sql);
+			stmt.executeUpdate(sql);
+			
 			sql = "INSERT INTO users VALUES ("
 					+ "'accepted', '666666', 1.0, 'cs', '411')";
 			System.out.println("Executing query: " + sql);
 			stmt.executeUpdate(sql);
 
 			sql = "INSERT INTO items VALUES ("
-					+ "'1', 'iPhoneX', 'Electrical device', 1000.0, 'https://cdn.vox-cdn.com/thumbor/4nOocrwrwul2VZax_BdyHyKkDR4=/0x0:2640x1748/1820x1213/filters:focal(1109x663:1531x1085)/cdn.vox-cdn.com/uploads/chorus_image/image/60675421/twarren_iphonesim_1.1533038365.jpg', 'This is an iPhoneX.', 'phone', 0.0, 'accepted')";
+					+ "'1', 'iPhoneX', 'Electrical device', 1000.0, 'https://cdn.vox-cdn.com/thumbor/4nOocrwrwul2VZax_BdyHyKkDR4=/0x0:2640x1748/1820x1213/filters:focal(1109x663:1531x1085)/cdn.vox-cdn.com/uploads/chorus_image/image/60675421/twarren_iphonesim_1.1533038365.jpg', 'This is an iPhoneX.', 'make phone calls, play games', 0.0, 'accepted')";
 			System.out.println("Executing query: " + sql);
 			stmt.executeUpdate(sql);
 			
 			sql = "INSERT INTO items (name, category, price, image_url, description, function, approve, seller_id) VALUES ("
-					+ " 'iClicker', 'Electrical device', 20.0, 'https://bloximages.newyork1.vip.townnews.com/purdueexponent.org/content/tncms/assets/v3/editorial/d/25/d25f5715-956a-51fb-a6ab-5f9020e08ec8/4ecb2c760e213.image.jpg?resize=584%2C759', 'This is an iClicker', 'education', 1.0, 'accepted')";
+					+ " 'iClicker', 'Electrical device', 20.0, 'https://bloximages.newyork1.vip.townnews.com/purdueexponent.org/content/tncms/assets/v3/editorial/d/25/d25f5715-956a-51fb-a6ab-5f9020e08ec8/4ecb2c760e213.image.jpg?resize=584%2C759', 'This is an iClicker', 'take notes, education', 1.0, 'accepted')";
 			System.out.println("Executing query: " + sql);
 			stmt.executeUpdate(sql);
 			
-			sql = "INSERT INTO items (name, category, price, image_url, description, approve, seller_id) VALUES ('ipad', 'Electrical device', 299, 'https://i.imgur.com/0WPSkev.jpg', 'Tablet designed by Apple', 1, 'fziyan2')";
+			sql = "INSERT INTO items (name, category, price, image_url, description, function, approve, seller_id) VALUES ('ipad', 'Electrical device', 299, 'https://i.imgur.com/IzPH5m0.jpg', 'Tablet designed by Apple', 'use it to take notes, watch videos and play games', 1, 'fziyan2')";
 			System.out.println("Executing query: " + sql);
 			stmt.executeUpdate(sql);
-			sql = "INSERT INTO items (name, category, price, image_url, description, approve, seller_id) VALUES ('AJ11', 'Sports', 220, 'https://i.imgur.com/GdTzUgw.jpg', '11th shoes of michael jordan designed by Air Jordan', 1, 'fziyan2')";
+			sql = "INSERT INTO items (name, category, price, image_url, description, function, approve, seller_id) VALUES ('AJ11', 'Sports', 220, 'https://i.imgur.com/GdTzUgw.jpg', '11th shoes of michael jordan designed by Air Jordan', 'wear it to play basketball', 1, 'fziyan2')";
 			System.out.println("Executing query: " + sql);
 			stmt.executeUpdate(sql);
-			sql = "INSERT INTO items (name, category, price, image_url, description, approve, seller_id) VALUES ('AJ1', 'Sports', 160, 'https://i.imgur.com/7c8LTsZ.jpg', '1st shoes of Michael Jordan designed by Air Jordan', 1, 'fziyan2')";
+			sql = "INSERT INTO items (name, category, price, image_url, description, function, approve, seller_id) VALUES ('AJ1', 'Sports', 160, 'https://i.imgur.com/7c8LTsZ.jpg', '1st shoes of Michael Jordan designed by Air Jordan', 'wear it to play basketball like Michael Jordan', 1, 'fziyan2')";
 			System.out.println("Executing query: " + sql);
 			stmt.executeUpdate(sql);
-			sql = "INSERT INTO items (name, category, price, image_url, description, approve, seller_id) VALUES ('AJ3', 'Sports', 190, 'https://i.imgur.com/j5SbQJl.jpg', '3rd shoes of Michael Jordan designed by Air Jordan', 1, 'fziyan2')";
+			sql = "INSERT INTO items (name, category, price, image_url, description, function, approve, seller_id) VALUES ('AJ3', 'Sports', 190, 'https://i.imgur.com/j5SbQJl.jpg', '3rd shoes of Michael Jordan designed by Air Jordan', 'wear it to play basketball like Michael Jordan', 1, 'fziyan2')";
 			System.out.println("Executing query: " + sql);
 			stmt.executeUpdate(sql);
-			sql = "INSERT INTO items (name, category, price, image_url, description, approve, seller_id) VALUES ('AJ4', 'Sports', 200, 'https://i.imgur.com/N8YmRnk.jpg', '4th shoes of Michael Jordan designed by Air Jordan', 1, 'fziyan2')";
+			sql = "INSERT INTO items (name, category, price, image_url, description, function, approve, seller_id) VALUES ('AJ4', 'Sports', 200, 'https://i.imgur.com/N8YmRnk.jpg', '4th shoes of Michael Jordan designed by Air Jordan', 'wear it to play basketball like Michael Jordan', 1, 'fziyan2')";
 			System.out.println("Executing query: " + sql);
 			stmt.executeUpdate(sql);
-			sql = "INSERT INTO items (name, category, price, image_url, description, approve, seller_id) VALUES ('iPhone 7', 'Electrical device', 799, 'https://i.imgur.com/gsNSbar.jpg', '7th iphone designed by Apple', 1, 'fziyan2')";
+			sql = "INSERT INTO items (name, category, price, image_url, description, function, approve, seller_id) VALUES ('iPhone 7', 'Electrical device', 799, 'https://i.imgur.com/gsNSbar.jpg', '7th iphone designed by Apple', 'use it to make phone call or send email', 1, 'fziyan2')";
 			System.out.println("Executing query: " + sql);
 			stmt.executeUpdate(sql);
-			sql = "INSERT INTO items (name, category, price, image_url, description, approve, seller_id) VALUES ('PS4', 'Electrical device', 299, 'https://i.imgur.com/LmWsA3D.jpg', 'Video Gamebox designed by Sony', 1, 'fziyan2')";
+			sql = "INSERT INTO items (name, category, price, image_url, description, function, approve, seller_id) VALUES ('PS4', 'Electrical device', 299, 'https://i.imgur.com/LmWsA3D.jpg', 'Video Gamebox designed by Sony', 'use it to play all kinds of video games by sony', 1, 'fziyan2')";
 			System.out.println("Executing query: " + sql);
 			stmt.executeUpdate(sql);
-			sql = "INSERT INTO items (name, category, price, image_url, description, approve, seller_id) VALUES ('Switch', 'Electrical device', 299, 'https://i.imgur.com/vRmJiOI.jpg', 'Video Gamebox designed by Nintendo', 1, 'fziyan2')";
+			sql = "INSERT INTO items (name, category, price, image_url, description, function, approve, seller_id) VALUES ('Switch', 'Electrical device', 299, 'https://i.imgur.com/vRmJiOI.jpg', 'Video Gamebox designed by Nintendo', 'use it to play all kinds of video games by Nitendo', 1, 'fziyan2')";
 			System.out.println("Executing query: " + sql);
 			stmt.executeUpdate(sql);
-			sql = "INSERT INTO items (name, category, price, image_url, description, approve, seller_id) VALUES ('Sprite', 'Snack', 1, 'https://i.imgur.com/vzqtd5z.jpg', 'Lemon flavor soda drink', 1, 'fziyan2')";
+			sql = "INSERT INTO items (name, category, price, image_url, description, function, approve, seller_id) VALUES ('Sprite', 'Snack', 1, 'https://i.imgur.com/vzqtd5z.jpg', 'Lemon flavor soda drink', 'Drink it with some snacks to relax and have fun', 1, 'fziyan2')";
 			System.out.println("Executing query: " + sql);
 			stmt.executeUpdate(sql);
-			sql = "INSERT INTO items (name, category, price, image_url, description, approve, seller_id) VALUES ('Chips', 'Snack', 1, 'https://i.imgur.com/FiWVFZN.jpg', 'Chips produced by Lays', 1, 'fziyan2')";
+			sql = "INSERT INTO items (name, category, price, image_url, description, function, approve, seller_id) VALUES ('Chips', 'Snack', 1, 'https://i.imgur.com/FiWVFZN.jpg', 'Chips produced by Lays', 'eat it with some drinks to relax', 1, 'fziyan2')";
 			System.out.println("Executing query: " + sql);
 			stmt.executeUpdate(sql);
-			sql = "INSERT INTO items (name, category, price, image_url, description, approve, seller_id) VALUES ('Oreo', 'Snack', 1, 'https://i.imgur.com/dqc8Oxc.jpg', 'Chocolate Cookie', 1, 'fziyan2')";
+			sql = "INSERT INTO items (name, category, price, image_url, description, function, approve, seller_id) VALUES ('Oreo', 'Snack', 1, 'https://i.imgur.com/dqc8Oxc.jpg', 'Chocolate Cookie', 'eat it with some milk for breakfast', 1, 'fziyan2')";
 			System.out.println("Executing query: " + sql);
 			stmt.executeUpdate(sql);
 			
-			sql = "INSERT INTO items (name, category, price, image_url, description, approve, seller_id) VALUES ('Sekiro', 'Electrical device', 59, 'https://i.imgur.com/5kMKUFR.jpg', 'Games designed by Fromsoftware', 1, 'yunanz2')";
+			sql = "INSERT INTO items (name, category, price, image_url, description, function, approve, seller_id) VALUES ('Sekiro', 'Electrical device', 59, 'https://i.imgur.com/5kMKUFR.jpg', 'Adventure game designed by Fromsoftware high quality act visual arts exciting plot skill set','experience the best pvp game explore history', 1, 'yunanz2')";
 			System.out.println("Executing query: " + sql);
 			stmt.executeUpdate(sql);
-			sql = "INSERT INTO items (name, category, price, image_url, description, approve, seller_id) VALUES ('XBOX', 'Electrical device', 165, 'https://i.imgur.com/Z4AK6OX.jpg', ' Game platform made by Microsoft', 1, 'yunanz2')";
+			sql = "INSERT INTO items (name, category, price, image_url, description, function, approve, seller_id) VALUES ('XBOX', 'Electrical device', 165, 'https://i.imgur.com/Z4AK6OX.jpg', ' Game platform made by Microsoft high speed multiple processor GPU processor numerous games', 'relax enjoy game spend time adventure experience',1, 'yunanz2')";
 			System.out.println("Executing query: " + sql);
 			stmt.executeUpdate(sql);
-			sql = "INSERT INTO items (name, category, price, image_url, description, approve, seller_id) VALUES ('GJacket', 'Clothes', 44, 'https://i.imgur.com/RJdcsrS.jpg', 'Basic jacket of Gym Shark', 1, 'yunanz2')";
+			sql = "INSERT INTO items (name, category, price, image_url, description, function, approve, seller_id) VALUES ('GJacket', 'Clothes', 44, 'https://i.imgur.com/RJdcsrS.jpg', 'Basic jacket of Gym Shark tight cut texture new design', 'sports experience workout look good', 1, 'yunanz2')";
 			System.out.println("Executing query: " + sql);
 			stmt.executeUpdate(sql);
-			sql = "INSERT INTO items (name, category, price, image_url, description, approve, seller_id) VALUES ('Ultraboost', 'Sports', 150, 'https://i.imgur.com/gYXQxYD.jpg', 'Jogging shoes made by Adidas', 1, 'yunanz2')";
+			sql = "INSERT INTO items (name, category, price, image_url, description, function, approve, seller_id) VALUES ('Ultraboost', 'Sports', 150, 'https://i.imgur.com/gYXQxYD.jpg', 'Jogging shoes made by Adidas lightweight reliable traction energized cushioning soft', 'runner type easy movement natural sports choices comfortable',1, 'yunanz2')";
 			System.out.println("Executing query: " + sql);
 			stmt.executeUpdate(sql);
-			sql = "INSERT INTO items (name, category, price, image_url, description, approve, seller_id) VALUES ('Lamy2000', 'Daily use', 149, 'https://i.imgur.com/BMFdLp1.jpg', 'Classical pen designed by Lamy', 1, 'yunanz2')";
+			sql = "INSERT INTO items (name, category, price, image_url, description, function, approve, seller_id) VALUES ('Lamy2000', 'Daily use', 149, 'https://i.imgur.com/BMFdLp1.jpg', 'Classical pen designed by Lamy refill system top ink','fountain pen for caligraphy and drawing living working partner', 1, 'yunanz2')";
 			System.out.println("Executing query: " + sql);
 			stmt.executeUpdate(sql);
-			sql = "INSERT INTO items (name, category, price, image_url, description, approve, seller_id) VALUES ('DMC5', 'Electrical device', 59, 'https://i.imgur.com/V9dRu7q.png', '5th game of dmc series made by capcom', 1, 'yunanz2')";
+			sql = "INSERT INTO items (name, category, price, image_url, description, function, approve, seller_id) VALUES ('DMC5', 'Electrical device', 59, 'https://i.imgur.com/V9dRu7q.png', 'High octane stylized action High octane stylized action  graphics fights','enjoy fight adventure games relax yourself with exciting game pvp pve entertainment', 1, 'yunanz2')";
 			System.out.println("Executing query: " + sql);
 			stmt.executeUpdate(sql);
-			sql = "INSERT INTO items (name, category, price, image_url, description, approve, seller_id) VALUES ('Campusbook', 'Daily use', 1, 'https://i.imgur.com/QpgLFcT.jpg', 'Kokuyo notebook for students', 1, 'yunanz2')";
+			sql = "INSERT INTO items (name, category, price, image_url, description,function, approve, seller_id) VALUES ('Campusbook', 'Daily use', 1, 'https://i.imgur.com/QpgLFcT.jpg', 'smooth paper notebook for students subtly printed layout','easy to write study organized take notes students', 1, 'yunanz2')";
 			System.out.println("Executing query: " + sql);
 			stmt.executeUpdate(sql);
-			sql = "INSERT INTO items (name, category, price, image_url, description, approve, seller_id) VALUES ('Sennheiser', 'Electrical device', 220, 'https://i.imgur.com/kFRyDOi.jpg', 'Best headphone ever', 1, 'yunanz2')";
+			sql = "INSERT INTO items (name, category, price, image_url, description, function, approve, seller_id) VALUES ('Sennheiser', 'Electrical device', 220, 'https://i.imgur.com/kFRyDOi.jpg', 'Best headphone battery design high capacity storage Refreshed Aesthetic',  'staying power enjoyable sound good appearance',1, 'yunanz2')";
 			System.out.println("Executing query: " + sql);
 			stmt.executeUpdate(sql);
-			sql = "INSERT INTO items (name, category, price, image_url, description, approve, seller_id) VALUES ('ProteinBar', 'Snack', 2, 'https://i.imgur.com/NxRIqk2.jpg', 'Dark choclate protein bar', 1, 'yunanz2')";
+			sql = "INSERT INTO items (name, category, price, image_url, description, function, approve, seller_id) VALUES ('ProteinBar', 'Snack', 2, 'https://i.imgur.com/NxRIqk2.jpg', 'Dark choclate protein barcreamy peanut butter nutritional bar luscious  ','protein workout supplies snack meal replacement good taste', 1, 'yunanz2')";
 			System.out.println("Executing query: " + sql);
 			stmt.executeUpdate(sql);
-			sql = "INSERT INTO items (name, category, price, image_url, description, approve, seller_id) VALUES ('DrPeper', 'Snack', 2, 'https://i.imgur.com/12jNipA.jpg?1', 'Drink for wise people', 1, 'yunanz2')";
+			sql = "INSERT INTO items (name, category, price, image_url, description, function, approve, seller_id) VALUES ('DrPeper', 'Snack', 2, 'https://i.imgur.com/12jNipA.jpg?1', 'Drink zero calories twenty three taste', 'workout dring stay slim good taste', 1, 'yunanz2')";
 			System.out.println("Executing query: " + sql);
 			stmt.executeUpdate(sql);
-			sql = "INSERT INTO items (name, category, price, image_url, description, approve, seller_id) VALUES ('Echo', 'Electrical device', 39, 'https://i.imgur.com/egBuPW7.jpg', 'Voice assistant', 1, 'yunanz2')";
+			sql = "INSERT INTO items (name, category, price, image_url, description, function, approve, seller_id) VALUES ('Echo', 'Electrical device', 39, 'https://i.imgur.com/egBuPW7.jpg', 'Voice assistant artificial intelligence speech recognition get smarter microphones', 'hands free music player smart assistant', 1, 'yunanz2')";
 			System.out.println("Executing query: " + sql);
 			stmt.executeUpdate(sql);
 			
