@@ -8,7 +8,7 @@ header("Access-Control-Allow-Methods:GET,POST");
  * Date: 2019-03-21
  * Time: 14:25
  */
- echo $files;
+echo $files;
 $files = $_FILES["img"];
 //if($files)echo "received!";
 //echo $files;

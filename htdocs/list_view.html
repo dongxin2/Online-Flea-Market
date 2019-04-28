@@ -1,80 +1,85 @@
+<!DOCTYPE html>
+<html>
 <head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Item Recommendation">
+    <meta name="author" content="Your Name">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="list_view.css">
+    <title>Manege The Items</title>
 </head>
 <body>
-<nav >Hello</nav>
-<div class="searcher">
-Category:<select id="category">
-    <option value = "Electrical device">Electrical device</option>
-    <option value = "Clothes">Clothes</option>
-    <option value = "Sports">Sports</option>
-    <option value = "Daily use">Daily use</option>
-    <option value = "Skin care">Skin care</option>
-    <option value = "Accessories">Accessories</option>
-    <option value = "Luggages">Luggages</option>
-    <option value = "Snack">Snack</option>
-    <option value = "Others">Others</option>
-    </select><button onclick="searchItems(1)">Let's do some search!</button>
-    <a href="http://localhost:8888/list_view.html">
-      <button>Cancel</button>
-    </a>
-
-</div>
-    <div id = "data-list">
-        <ul>   </ul>
+<section class="container">
+    <header>
+        <p><span>Hello!</span><br/>Manage The Items</p>
+    </header>
+    <div class="main-section">
+        <div class="searcher">
+            <div class="searcher-content">
+                Category:&nbsp&nbsp
+                <select id="category">
+                    <option value = "Electrical device">Electrical device</option>
+                    <option value = "Clothes">Clothes</option>
+                    <option value = "Sports">Sports</option>
+                    <option value = "Daily use">Daily use</option>
+                    <option value = "Skin care">Skin care</option>
+                    <option value = "Accessories">Accessories</option>
+                    <option value = "Luggages">Luggages</option>
+                    <option value = "Snack">Snack</option>
+                    <option value = "Others">Others</option>
+                </select>
+            </div>
+            <div class="searcher-content">
+                <button onclick="searchItems(1)">Let's do some search!</button>
+            </div>
+            <div class="searcher-content">
+                <a href="http://localhost:8888/list_view.html">
+                    <button>Cancel</button>
+                </a>
+            </div>
+        </div>
+        <div id = "data-list">
+            <ul id="item-list">   </ul>
+        </div>
+        <div id = "search-list">
+            <ul id="item-list_search">   </ul>
+        </div>
+        <div class="page-container">
+            <form action="dbupdate.php" method="get">
+                <select id="itemid" name="itemid" style="margin-right: 1.5em;">
+                </select>
+                <select name="action" style="margin-right: 1.5em;">
+                    <option value="approve">approve</option>
+                    <option value="deny">deny</option>
+                </select>
+                <input type="submit" value="go!" />
+            </form>
+            <div id = "page-bar"></div>
+        </div>
     </div>
-    <div id = "search-list">
-        <ul>   </ul>
-    </div>
-<form action="dbupdate.php" method="get">
-    <select id="itemid" name="itemid">
-    </select>
-        <select name="action">
-        <option value="approve">approve</option>
-        <option value="deny">deny</option>
-        </select>
-        <input type="submit" value="go!" />
-    </form>
-    <div id = "page-bar"></div>
+    <button onclick="sendinput()">Do recommendate</button>
+</section>
+<footer>
+    <p class="title">What We Do</p>
+    <p>"Help you find the cheapest around."</p>
+    <ul>
+        <li>
+            <p><i class="fa fa-map-o fa-2x"></i></p>
+            <p>University of Illinois, IL</p>
+        </li>
+        <li>
+            <p><i class="fa fa-envelope-o fa-2x"></i></p>
+            <p>info@gmail.com</p>
+        </li>
+        <li>
+            <p><i class="fa fa-phone fa-2x"></i></p>
+            <p>+1 666 666 666</p>
+        </li>
+    </ul>
+</footer>
 </body>
-<style>
-    #page-bar {
-        text-align: right;
-        padding: 0 20px 20px 0;
-    }
-    .pageBtn a {
-        display: inline-block;
-        border: 1px solid #aaa;
-        padding: 2px 5px;
-        margin : 0 3px;
-        font-size: 13px;
-        background: #ECECEC;
-        color: black;
-        text-decoration: none;
-        -moz-border-radius: 2px;
-        -webkit-border-radius: 3px;
-    }
-    .pageBtn-selected a {
-        display: inline-block;
-        border: 1px solid #aaa;
-        padding: 2px 5px;
-        margin : 0 3px;
-        font-size: 13px;
-        background: #187BBD;
-        color: white;
-        text-decoration: none;
-        -moz-border-radius: 2px;
-        -webkit-border-radius: 3px;
-    }
-    .pageBtn a:hover {
-        background: #187BBD;
-        color: white;
-    }
-    .view-img {
-        width:200px;
-        height:200px;
-    }
-</style>
 <script type="text/javascript">
     var curPage;
     var totalItem;
@@ -113,7 +118,17 @@ Category:<select id="category">
                     // console.log(index);
                     // console.log("this is array");
                     // console.log(array);
-                    data_html+="<li>" +array['item_id']+"<img class = 'view-img' src = "+array['image_url'] + ">" +"&nbsp;" + array['category'] +"&nbsp;" +array['price'] +"&nbsp;" + array['description'] + "&nbsp;" + array['seller_id'] +"</li>";
+                    // data_html+="<li class='item'>" + array['item_id'] + "<img class='view-img' src = " + array['image_url'] + ">" + "&nbsp;" + array['category'] +"&nbsp;" +array['price'] + "&nbsp;" + array['description'] + "&nbsp;" + array['seller_id'] + "</li>";
+                    data_html+="<li class='item'>" +
+                        "<img class='view-img' alt='item image' src=" + array['image_url'] + ">" +
+                        "<div>" +
+                        "<a hef='#' class='item-name'>" + "Item Id:" + "&nbsp" + array['item_id'] + "</a>" +
+                        "<p class='item-category'>" + "Category:" + "&nbsp" + array['category'] + "</p>" +
+                        "<p class='item-price'>" + "Price:" + "&nbsp" + array['price'] + "</p>" +
+                        "<p class='seller-id'>" + "Seller Id:" + "&nbsp" + array['seller_id'] + "</p>" +
+                        "<p class='description'>" + "Description:" + "&nbsp" + array["description"] + "</p>" +
+                        "</div>" +
+                        "</li>";
                     var selectnode=document.createElement("option");
                     selectnode.value=array['item_id'];
                     selectnode.innerHTML=array['item_id'];
@@ -151,16 +166,26 @@ Category:<select id="category">
                 $.each(data_content,function (index,array) {
                     // console.log("this is index");
                     // console.log(index);
-                    // console.log("this is array");
+                    // console.log("this is array");s
                     // console.log(array);
-                    data_html+="<li>" +array['item_id']+"<img class = 'view-img' src = "+array['image_url'] + ">" +"&nbsp;" + array['category'] +"&nbsp;" +array['price'] +"&nbsp;" + array['description'] + "&nbsp;" + array['seller_id'] +"</li>";
+                    // data_html+="<li>" +array['item_id']+"<img class = 'view-img' src = "+array['image_url'] + ">" +"&nbsp;" + array['category'] +"&nbsp;" +array['price'] +"&nbsp;" + array['description'] + "&nbsp;" + array['seller_id'] +"</li>";
+                    data_html+="<li class='item'>" +
+                        "<img class='view-img' alt='item image' src=" + array['image_url'] + ">" +
+                        "<div>" +
+                        "<a hef='#' class='item-name'>" + "Item Id:" + "&nbsp" + array['item_id'] + "</a>" +
+                        "<p class='item-category'>" + "Category:" + "&nbsp" + array['category'] + "</p>" +
+                        "<p class='item-price'>" + "Price:" + "&nbsp" + array['price'] + "</p>" +
+                        "<p class='seller-id'>" + "Seller Id:" + "&nbsp" + array['seller_id'] + "</p>" +
+                        "<p class='description'>" + "Description:" + "&nbsp" + array["description"] + "</p>" +
+                        "</div>" +
+                        "</li>";
                     var selectnode=document.createElement("option");
                     selectnode.value=array['item_id'];
                     selectnode.innerHTML=array['item_id'];
                     document.getElementById("itemid").appendChild(selectnode);
                 });
                 $("#data-list ul").append(data_html);
-                },
+            },
             complete:function () {
                 getPageBar();
             },
@@ -215,4 +240,17 @@ Category:<select id="category">
     $(function () {
         turnPage(1);
     });
+    function sendinput(){
+        console.log("Im here");
+        $.ajax({
+            type:'post',
+            url:'findrecommand.php',
+            data:""
+        }).done(function(res){
+            console.log(res);
+        }).fail(function(err){
+            console.log(err);
+        });
+    };
 </script>
+</html>
