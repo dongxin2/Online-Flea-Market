@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="styles/upload_item.css">
+</head>
+<body>
+    <div>
+        <div class="box">
+            <div class="box-header">
+                <h2 style="color: white; opacity: .65; font-size: 4rem; display: flex; justify-content: center; align-items: center; height: 100%;">UPLOAD</h2>
+            </div>
+            <div class="box-body">
+                <form id="form" class="form-container">
+                <label class="form-input">
+                    <i class="material-icons">casino</i>
+                    <input type="text" name="pwd" id="name" class="input" autofocus="true" required />
+                    <span class="label">Item Name</span>
+                    <span class="underline"></span>
+                </label>
+                <label class="form-input">
+                    <i class="material-icons">money</i>
+                    <input type="text" name="pwd" id="price" class="input" required />
+                    <span class="label">Price</span>
+                    <div class="underline"></div>
+                </label>
+                <label class="form-input">
+                        <i class="material-icons">short_text</i>
+                        <input type="text" name="pwd" id="descrpition" class="input" required />
+                        <span class="label">Description</span>
+                        <div class="underline"></div>
+                </label>
+                <!-- The funtcion input is newly added -->
+                <label class="form-input">
+                    <i class="material-icons">functions</i>
+                    <input type="text" name="pwd" id="function" class="input" required />
+                    <span class="label">Function</span>
+                    <div class="underline"></div>
+                </label>
+                </form>
+                <br>
+                <div class="custom-select">
+                    Category:&nbsp&nbsp
+                    <select id="category" style="width:200px;">
+                        <option value = "Electrical device">Electrical device</option>
+                        <option value = "Clothes">Clothes</option>
+                        <option value = "Sports">Sports</option>
+                        <option value = "Daily use">Daily use</option>
+                        <option value = "Skin care">Skin care</option>
+                        <option value = "Accessories">Accessories</option>
+                        <option value = "Luggages">Luggages</option>
+                        <option value = "Snack">Snack</option>
+                        <option value = "Others">Others</option>
+                    </select><br><br>
+                </div>
+                <div class="img-container">
+                    <form id="uploadForm" enctype="multipart/form-data">
+                    your Upload Image: &nbsp&nbsp
+                    <input id="img_input" type="file" accept="image/*" value="upload image"/>
+                    </form>
+                </div>
+                <br><br>
+                <div class="button-container">
+                        <input type="submit" value="Submit" class="sub">
+                        <button onclick="window.location.href='http://localhost:8080/Jupiter/'", class="sub2">Main page</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<!-- <div class="box">
+    Name:&nbsp&nbsp<input type="text" name="pwd" id="name" class="input"> <br><br>
+    Category:&nbsp&nbsp<select id="category">
+    <option value = "Electrical device">Electrical device</option>
+    <option value = "Clothes">Clothes</option>
+    <option value = "Sports">Sports</option>
+    <option value = "Daily use">Daily use</option>
+    <option value = "Skin care">Skin care</option>
+    <option value = "Accessories">Accessories</option>
+    <option value = "Luggages">Luggages</option>
+    <option value = "Snack">Snack</option>
+    <option value = "Others">Others</option>
+  </select><br><br>
+    Price:&nbsp&nbsp<input type="text" name="pwd" id="price" class="input"> <br><br>
+    <form id="uploadForm" enctype="multipart/form-data">
+    <input id="img_input" type="file" accept="image/*"/>
+    </form>
+    Description:<input type="text" id="descrpition" class="input"> <br><br>
+    <input type="submit" value="Submit" class="submit">
+    <span class='pageBtn'><a href='http://localhost:8080/Jupiter/'>Home Page</a></span>
+    <div class="preview_box"></div>
+</div>
+<label for="img_input"></label> -->
+
+<script type="text/javascript">
+    $(".sub").click(function () {
+        var formData = new FormData();
+        formData.append('img',$('#img_input')[0].files[0]);
+        var file;
+        $.ajax({
+            url: 'http://localhost:8888/upload_file.php',
+            type: 'POST',
+            crossDomain: true,
+            cache: false,
+            data: formData,
+            processData: false,
+            contentType: false
+        }).done(function (res) {
+            console.log("success!");
+            console.log(res);
+            // console.log(file);
+            var user_id = sessionStorage.getItem('user_id');
+            var name = $("#name").val();
+            var catefory = $("#category").val();
+            var price = $("#price").val();
+            var description = $('#descrpition').val();
+            var data = {
+            	seller:user_id,
+                name: name,
+                cate: catefory,
+                pric: price,
+                desc: description,
+                file: res,
+            }
+            // res.console.log();
+            const option = {
+                method:'post',
+                mode:'cors',
+                headers:{},
+                body:JSON.stringify(data)
+            };
+            // file = res;
+            fetch('http://localhost:8888//upload_item.php',option).then(response=>{
+                resdata = response.json();
+                return resdata;
+            }).then(function(data1){
+ //               console.log(1,data1);
+                alert(data1["msg"]);
+                // if(data1["code"]==1);
+                // if(data1["code"]==2)
+            })
+            // console.log(file);
+        }).fail(function (res) {
+            console.log("fail to save");
+            console.log(res);
+        });
+        $.ajax({
+            url: 'http://localhost:8888//sendinput.php',
+            type: 'POST',
+            crossDomain: true,
+            async:false,
+            cache: false,
+            data: formData,
+            processData: false,
+            contentType: false
+        }).done(function (res) {
+        	console.log(res);
+        	console.log("update item data!");
+            const option = {
+                method:'post',
+                mode:'cors',
+                headers:{},
+                body:JSON.stringify("")
+            };
+          // ignore_user_abort(1); // run script in background
+          // set_time_limit(500); // run script forever
+          fetch('http://localhost:8888//findrecommand.php',option).then(response=>{
+  					console.log("Im here!");
+          })
+          .catch((error)=>{
+              console.log(error);
+          })
+            // console.log(file);
+        }).fail(function (res) {
+            console.log("fail to save");
+            console.log(res);
+        });
+    })
+</script>
+</html>

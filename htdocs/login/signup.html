@@ -1,0 +1,22 @@
+<h2>Signup system</h2>
+<hr>
+<form action="register.php" method="POST" enctype="multipart/form-data">
+    Username:
+    <input type="text" name="userName" size="20" maxlength="15" placeholder="please register with your email">
+    @
+    <select name="domain" id="">
+        <option value="@163.com" selected>163.com</option>
+        <option value="@illinois.edu">illinois.edu</option>
+        <option value="@gmail.com">gmail.com</option>
+    </select>
+    <br>
+
+    Password:
+    <input type="password" name="password" size="20" maxlength="15">
+    <br>
+
+    Confirm Password:
+    <input type="password" name="confirmPassword" size="20" maxlength="15">
+    <br>
+    <input type="submit" name="submit" value="Submit">
+</form>

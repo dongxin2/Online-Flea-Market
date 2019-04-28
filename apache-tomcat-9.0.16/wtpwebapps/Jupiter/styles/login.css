@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,200i,300,300i,400,400i,600,600i,700,700i,900,900i|Monoton');
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background: linear-gradient(to bottom, #dfbe2f, #ffffff);
+    color: #454749;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family:
+      'Source Sans Pro',
+      sans-serif;
+    min-height: 100vh;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: Monoton, sans-serif;
+    margin-bottom: .5rem;
+}
+
+html {
+    font-size: 14px;
+}
+
+.box {
+    background-color: #ffffff;
+    border-radius: .1rem;
+    box-shadow: 0 .75rem 1.5rem rgba(0,0,0,0.2), 0 .25rem .25rem rgba(0,0,0,0.2);
+    position: relative;
+    width: 100%;
+    min-width: 320px;
+    max-width: 24rem;
+    overflow: hidden;
+}
+
+.box-header {
+    background-image: url('https://res.cloudinary.com/dgmilxzy7/image/upload/c_scale,w_500,o_75,b_rgb:07beb8/v1506735375/CodePen/ViddenPixel.jpg');
+    background-position: center;
+    background-size: cover;
+    height: 12rem;
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.box-body {
+    padding: 2rem;
+}
+
+.form-input {
+    display: block;
+    position: relative;
+    margin-bottom: 1rem;
+}
+
+.material-icons {
+    position: absolute;
+    font-size: 1.5rem;
+    top: 0.3rem;
+}
+
+.input, .label, .underline{
+    height: 30px;
+    margin-left: 2.25rem;
+    width: calc(100% - 2.25rem);
+}
+
+
+
+.log {
+    margin-left: 32%;
+    width: 100px;
+    height: 30px;
+    font-family: 'Lobster', cursive;
+    font-size: larger; 
+    color: teal; 
+    background-color: white;
+    border: 0;
+}
